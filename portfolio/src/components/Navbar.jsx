@@ -7,7 +7,8 @@ const Navbar = ({ onPageChange }) => {
 
   const navLinks = [
     { id: 'home', name: 'Home', href: '#home' },
-    { id: 'about', name: 'About', href: '#about' }
+    { id: 'about', name: 'About', href: '#about' },
+    { id: 'blog', name: 'Blog', href: '#blog' }
   ]
 
   // Handle dark mode toggle

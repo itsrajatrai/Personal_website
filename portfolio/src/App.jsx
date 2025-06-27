@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
+import Blog from './components/Blog'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -10,6 +11,8 @@ function App() {
     switch(currentPage) {
       case 'about':
         return <About />
+      case 'blog':
+        return <Blog />
       default:
         return <Hero />
     }
