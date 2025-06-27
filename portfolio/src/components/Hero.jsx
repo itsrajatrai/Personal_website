@@ -1,42 +1,58 @@
 import React, { useState } from 'react'
+import { useBlogPosts } from '../hooks/useBlogPosts'
 
 const Hero = () => {
   const [activeTab, setActiveTab] = useState('tech')
+  const { posts, loading } = useBlogPosts()
 
-  const recentBlogs = [
-    // Tech Blogs (2 latest)
-    {
-      title: "Building Scalable React Applications",
-      category: "Tech",
-      date: "2 days ago",
-      readTime: "5 min read",
-      excerpt: "Learn the best practices for building maintainable React apps with modern patterns and architecture..."
-    },
-    {
-      title: "Mastering TypeScript in 2024",
-      category: "Tech",
-      date: "1 week ago",
-      readTime: "8 min read",
-      excerpt: "Essential TypeScript patterns and advanced features every developer should know for better code quality..."
-    },
-    // Non-Tech Blogs (2 latest)
-    {
-      title: "The Art of Mindful Productivity",
-      category: "Lifestyle",
-      date: "3 days ago", 
-      readTime: "3 min read",
-      excerpt: "How to stay focused and productive in a distracted world while maintaining mental well-being..."
-    },
-    {
-      title: "Finding Balance in a Digital World",
-      category: "Lifestyle",
-      date: "1 week ago",
-      readTime: "4 min read",
-      excerpt: "Strategies for maintaining work-life balance in the fast-paced tech industry..."
+  // Utility to strip HTML tags from a string
+  const stripHtml = (html) => {
+    if (!html) return ''
+    const div = document.createElement('div')
+    div.innerHTML = html
+    return div.textContent || div.innerText || ''
+  }
+
+  // Estimate read time (200 words/minute)
+  const estimateReadTime = (text) => {
+    if (!text) return ''
+    const words = text.trim().split(/\s+/).length
+    const minutes = Math.max(1, Math.round(words / 200))
+    return `${minutes} min read`
+  }
+
+  // Prepare blog data for tabs
+  const techBlogs = (posts.hashnode || []).slice(0, 2).map(post => {
+    const excerpt = stripHtml(post.brief)
+    return {
+      title: post.title,
+      category: 'Tech',
+      date: new Date(post.dateAdded).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+      readTime: estimateReadTime(excerpt),
+      excerpt,
+      url: post.url
     }
-  ]
+  })
+  const nonTechBlogs = (posts.medium || []).slice(0, 2).map(post => {
+    const excerpt = stripHtml(post.description)
+    return {
+      title: post.title,
+      category: 'Non-Tech',
+      date: new Date(post.pubDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }),
+      readTime: post.readingTime || estimateReadTime(excerpt),
+      excerpt,
+      url: post.link
+    }
+  })
 
-  const filteredBlogs = recentBlogs.filter(blog => blog.category.toLowerCase() === activeTab)
+  const filteredBlogs = activeTab === 'tech' ? techBlogs : nonTechBlogs
+
+  // Truncate excerpt to 2 lines (about 150 chars)
+  const truncateExcerpt = (text, maxLength = 150) => {
+    if (!text) return ''
+    if (text.length <= maxLength) return text
+    return text.substring(0, maxLength) + '...'
+  }
 
   return (
     <section className="section min-h-screen flex items-center justify-start bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 relative">
@@ -124,9 +140,9 @@ const Hero = () => {
                   Tech
                 </button>
                 <button
-                  onClick={() => setActiveTab('lifestyle')}
+                  onClick={() => setActiveTab('non-tech')}
                   className={`px-3 py-1 text-sm font-medium rounded-md transition-colors ${
-                    activeTab === 'lifestyle'
+                    activeTab === 'non-tech'
                       ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
                       : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
                   }`}
@@ -136,33 +152,38 @@ const Hero = () => {
               </div>
             </div>
             <div className="space-y-6">
-              {filteredBlogs.map((blog, index) => (
+              {loading ? (
+                <div className="text-gray-500 dark:text-gray-400">Loading...</div>
+              ) : filteredBlogs.length === 0 ? (
+                <div className="text-gray-500 dark:text-gray-400">No posts yet!</div>
+              ) : filteredBlogs.map((blog, index) => (
                 <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
                   <div className="flex items-center justify-between mb-3">
                     <span className={`px-3 py-1 text-xs font-medium rounded-full ${
                       blog.category === 'Tech' 
                         ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' 
-                        : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                        : 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200'
                     }`}>
                       {blog.category}
                     </span>
                     <div className="flex items-center space-x-2 text-sm text-gray-500 dark:text-gray-400">
                       <span>{blog.date}</span>
-                      <span>•</span>
-                      <span>{blog.readTime}</span>
+                      {blog.readTime && <><span>•</span><span>{blog.readTime}</span></>}
                     </div>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer">
-                    {blog.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                    {blog.excerpt}
+                  <a href={blog.url} target="_blank" rel="noopener noreferrer">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer">
+                      {blog.title}
+                    </h3>
+                  </a>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed line-clamp-2">
+                    {truncateExcerpt(blog.excerpt)}
                   </p>
                 </div>
               ))}
             </div>
             <div className="mt-6">
-              <a href="#" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
+              <a href="#" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'}) || window.dispatchEvent(new CustomEvent('navigateToBlog'))} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
                 View all posts →
               </a>
             </div>

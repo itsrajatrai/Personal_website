@@ -188,6 +188,29 @@ const Blog = () => {
           </div>
         )}
       </div>
+      {/* Footer (now outside the main content, not absolutely positioned) */}
+      <div className="border-t border-gray-200/20 dark:border-gray-700/20 bg-white/5 dark:bg-gray-900/5 backdrop-blur-sm">
+        <div className="container">
+          <div className="flex items-center justify-between py-4">
+            {/* Let's Talk */}
+            <div>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-1">
+                Have ideas or want to collaborate?
+              </p>
+              <a 
+                href="mailto:rajat@example.com"
+                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors font-medium"
+              >
+                Let's Talk →
+              </a>
+            </div>
+            {/* Copyright */}
+            <div className="text-gray-600 dark:text-gray-400 text-sm">
+              © {new Date().getFullYear()} Rajat Rai. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

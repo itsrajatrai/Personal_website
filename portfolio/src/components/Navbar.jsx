@@ -50,7 +50,7 @@ const Navbar = ({ onPageChange }) => {
           <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
             <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
             <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
-              Rajat is building something!
+              Rajat is building something very cool!
             </span>
           </div>
 
