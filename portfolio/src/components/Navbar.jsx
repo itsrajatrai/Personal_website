@@ -5,7 +5,7 @@ import LanguageSwitcher from './LanguageSwitcher'
 
 const Navbar = ({ onPageChange, currentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(true)
   const { currentLanguage } = useLanguage()
 
   // Apply Kaithi font for Bhojpuri language
@@ -34,11 +34,15 @@ const Navbar = ({ onPageChange, currentPage }) => {
   // Initialize theme on component mount
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    if (savedTheme === 'light') {
+      setIsDarkMode(false)
+      document.documentElement.classList.remove('dark')
+    } else {
+      // Default to dark mode
       setIsDarkMode(true)
       document.documentElement.classList.add('dark')
+      localStorage.setItem('theme', 'dark')
     }
   }, [])
 
