@@ -5,10 +5,25 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
   }
   
   body {
     @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Improve touch targets on mobile */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Prevent zoom on input focus on iOS */
+  input, textarea, select {
+    font-size: 16px;
   }
 }
 
@@ -18,7 +33,7 @@
   }
   
   .section {
-    @apply py-16 md:py-24;
+    @apply py-12 sm:py-16 md:py-24;
   }
   
   .btn {
@@ -31,6 +46,18 @@
   
   .btn-secondary {
     @apply bg-gray-200 text-gray-900 hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600;
+  }
+
+  /* Mobile-specific improvements */
+  .mobile-touch-target {
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
+  }
+
+  .mobile-safe-area {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
 }
 
@@ -51,6 +78,55 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  /* Mobile-specific utilities */
+  .mobile-text-sm {
+    @apply text-sm sm:text-base;
+  }
+
+  .mobile-text-base {
+    @apply text-base sm:text-lg;
+  }
+
+  .mobile-text-lg {
+    @apply text-lg sm:text-xl;
+  }
+
+  .mobile-text-xl {
+    @apply text-xl sm:text-2xl;
+  }
+
+  .mobile-text-2xl {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  .mobile-text-3xl {
+    @apply text-3xl sm:text-4xl;
+  }
+
+  .mobile-text-4xl {
+    @apply text-4xl sm:text-5xl;
+  }
+
+  .mobile-text-5xl {
+    @apply text-5xl sm:text-6xl;
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  .mobile-no-scroll-x {
+    overflow-x: hidden;
+  }
+
+  /* Better mobile spacing */
+  .mobile-space-y > * + * {
+    margin-top: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .mobile-space-y > * + * {
+      margin-top: 1.5rem;
+    }
   }
 }
 
@@ -95,4 +171,54 @@
 
 .dark ::-webkit-scrollbar-thumb:hover {
   background: #9ca3af;
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 640px) {
+  /* Reduce padding on mobile */
+  .container {
+    @apply px-4;
+  }
+
+  /* Better mobile navigation */
+  .mobile-nav-item {
+    @apply py-3 px-4;
+  }
+
+  /* Improve mobile card spacing */
+  .mobile-card {
+    @apply p-4;
+  }
+
+  /* Better mobile button sizing */
+  .mobile-btn {
+    @apply px-4 py-2 text-sm;
+  }
+}
+
+/* Tablet-specific improvements */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .tablet-container {
+    @apply px-6;
+  }
+}
+
+/* Prevent text selection on interactive elements */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Improve focus states for accessibility */
+.focus-visible:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Better mobile performance */
+.mobile-optimized {
+  will-change: transform;
+  transform: translateZ(0);
 }

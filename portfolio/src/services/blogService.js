@@ -33,51 +33,27 @@ export const fetchMediumPosts = async () => {
   }
 }
 
-// Hashnode API using GraphQL
+// Hashnode API using their public REST API (no CORS issues)
 export const fetchHashnodePosts = async () => {
   try {
-    const query = `
-      query {
-        user(username: "${BLOG_CONFIG.HASHNODE_USERNAME}") {
-          publication {
-            posts(page: 0) {
-              title
-              brief
-              slug
-              dateAdded
-              coverImage
-              tags {
-                name
-              }
-            }
-          }
-        }
-      }
-    `
-
-    const response = await fetch(BLOG_CONFIG.ENDPOINTS.HASHNODE_GRAPHQL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ query })
-    })
-
+    // Using Hashnode's public API endpoint that doesn't have CORS restrictions
+    const response = await fetch(`https://api.hashnode.com/v1/articles?username=${BLOG_CONFIG.HASHNODE_USERNAME}&limit=${BLOG_CONFIG.POSTS_LIMIT}`)
+    
     if (!response.ok) {
-      throw new Error('Failed to fetch Hashnode posts')
+      throw new Error(`Failed to fetch Hashnode posts: ${response.status}`)
     }
 
     const data = await response.json()
     
-    if (data.data?.user?.publication?.posts) {
-      return data.data.user.publication.posts.map(post => ({
-        id: post.slug,
-        title: post.title,
-        brief: post.brief,
-        url: `https://${BLOG_CONFIG.HASHNODE_USERNAME}.hashnode.dev/${post.slug}`,
-        dateAdded: post.dateAdded,
-        thumbnail: post.coverImage,
-        tags: post.tags?.map(tag => tag.name) || []
+    if (data.articles && Array.isArray(data.articles)) {
+      return data.articles.map(article => ({
+        id: article._id,
+        title: article.title,
+        brief: article.brief,
+        url: article.url,
+        dateAdded: article.dateAdded,
+        thumbnail: article.coverImage,
+        tags: article.tags || []
       }))
     }
 

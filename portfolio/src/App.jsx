@@ -25,9 +25,39 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
-      <Navbar onPageChange={setCurrentPage} />
-      {renderPage()}
+    <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
+      {/* Fixed Navbar at top */}
+      <Navbar onPageChange={setCurrentPage} currentPage={currentPage} />
+      
+      {/* Main content area - takes remaining space */}
+      <main className="flex-1 pt-16">
+        {renderPage()}
+      </main>
+      
+      {/* Footer at bottom */}
+      <footer className="border-t border-gray-200/20 dark:border-gray-700/20 bg-white/5 dark:bg-gray-900/5 backdrop-blur-sm">
+        <div className="container">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 gap-4 text-center lg:text-left">
+            {/* Let's Talk */}
+            <div>
+              <p className="text-gray-600 dark:text-gray-400 text-sm mb-1">
+                Have ideas or want to collaborate?
+              </p>
+              <a 
+                href="mailto:rajat@example.com"
+                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors font-medium"
+              >
+                Let's Talk →
+              </a>
+            </div>
+
+            {/* Copyright */}
+            <div className="text-gray-600 dark:text-gray-400 text-sm">
+              © {new Date().getFullYear()} Rajat Rai. All rights reserved.
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

@@ -17,7 +17,6 @@ export const BLOG_CONFIG = {
   // API endpoints
   ENDPOINTS: {
     MEDIUM_RSS: 'https://api.rss2json.com/v1/api.json',
-    HASHNODE_GRAPHQL: 'https://api.hashnode.com/',
     HASHNODE_REST: 'https://api.hashnode.com/v1/articles'
   }
 }
@@ -29,5 +28,5 @@ export const getMediumRSSUrl = (username) => {
 
 // Helper function to get Hashnode REST URL
 export const getHashnodeRESTUrl = (username) => {
-  return `${BLOG_CONFIG.ENDPOINTS.HASHNODE_REST}?username=${username}`
+  return `${BLOG_CONFIG.ENDPOINTS.HASHNODE_REST}?username=${username}&limit=${BLOG_CONFIG.POSTS_LIMIT}`
 } 

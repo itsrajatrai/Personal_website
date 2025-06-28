@@ -12,13 +12,15 @@ export const useBlogPosts = () => {
         setLoading(true)
         setError(null)
         
-        // Check for cached data
+        // Check for cached data with version control
         const cached = localStorage.getItem('blogPosts')
         const cacheTime = localStorage.getItem('blogPostsTime')
+        const cacheVersion = localStorage.getItem('blogPostsVersion')
         const now = Date.now()
+        const currentVersion = '1.0' // Increment this when you make changes
         
-        // Use cache if it's less than 5 minutes old
-        if (cached && cacheTime && (now - parseInt(cacheTime)) < 5 * 60 * 1000) {
+        // Use cache if it's less than 5 minutes old and version matches
+        if (cached && cacheTime && cacheVersion === currentVersion && (now - parseInt(cacheTime)) < 5 * 60 * 1000) {
           setPosts(JSON.parse(cached))
           setLoading(false)
           return
@@ -26,9 +28,10 @@ export const useBlogPosts = () => {
         
         const data = await fetchAllPosts()
         
-        // Cache the results
+        // Cache the results with version
         localStorage.setItem('blogPosts', JSON.stringify(data))
         localStorage.setItem('blogPostsTime', now.toString())
+        localStorage.setItem('blogPostsVersion', currentVersion)
         
         setPosts(data)
       } catch (err) {
@@ -46,6 +49,7 @@ export const useBlogPosts = () => {
     // Clear cache and refetch
     localStorage.removeItem('blogPosts')
     localStorage.removeItem('blogPostsTime')
+    localStorage.removeItem('blogPostsVersion')
     
     setLoading(true)
     setError(null)
@@ -56,6 +60,7 @@ export const useBlogPosts = () => {
       // Cache the results
       localStorage.setItem('blogPosts', JSON.stringify(data))
       localStorage.setItem('blogPostsTime', Date.now().toString())
+      localStorage.setItem('blogPostsVersion', '1.0')
       
       setPosts(data)
     } catch (err) {

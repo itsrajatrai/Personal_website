@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
-const Navbar = ({ onPageChange }) => {
+const Navbar = ({ onPageChange, currentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activePage, setActivePage] = useState('home')
   const [isDarkMode, setIsDarkMode] = useState(false)
 
   const navLinks = [
@@ -36,21 +35,35 @@ const Navbar = ({ onPageChange }) => {
     }
   }, [])
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (isMenuOpen && !event.target.closest('nav')) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+    return () => document.removeEventListener('click', handleClickOutside)
+  }, [isMenuOpen])
+
   const handlePageChange = (pageId) => {
-    setActivePage(pageId)
     onPageChange(pageId)
     setIsMenuOpen(false)
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-transparent backdrop-blur-sm border-b border-gray-200/20 dark:border-gray-700/20 z-50">
+    <nav className="fixed top-0 left-0 right-0 bg-transparent backdrop-blur-sm border-b border-gray-200/20 dark:border-gray-700/20 z-50 mobile-safe-area">
       <div className="container">
         <div className="flex items-center justify-between h-16">
           {/* Status Indicator */}
-          <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
-            <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+          <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 px-2 sm:px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
+            <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
+            <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium hidden sm:inline">
               Rajat is building something very cool!
+            </span>
+            <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium sm:hidden">
+              Building cool stuff!
             </span>
           </div>
 
@@ -60,8 +73,8 @@ const Navbar = ({ onPageChange }) => {
               <button
                 key={link.id}
                 onClick={() => handlePageChange(link.id)}
-                className={`transition-colors duration-200 font-medium ${
-                  activePage === link.id
+                className={`transition-colors duration-200 font-medium mobile-touch-target ${
+                  currentPage === link.id
                     ? 'text-blue-600 dark:text-blue-400'
                     : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                 }`}
@@ -73,7 +86,7 @@ const Navbar = ({ onPageChange }) => {
             {/* Dark Mode Toggle */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-white/80 dark:hover:bg-gray-800/80 transition-all duration-200"
+              className="p-2 rounded-lg bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-white/80 dark:hover:bg-gray-800/80 transition-all duration-200 mobile-touch-target"
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
@@ -93,7 +106,7 @@ const Navbar = ({ onPageChange }) => {
             {/* Dark Mode Toggle for Mobile */}
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-white/80 dark:hover:bg-gray-800/80 transition-all duration-200"
+              className="p-2 rounded-lg bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 hover:bg-white/80 dark:hover:bg-gray-800/80 transition-all duration-200 mobile-touch-target"
               aria-label="Toggle dark mode"
             >
               {isDarkMode ? (
@@ -109,7 +122,8 @@ const Navbar = ({ onPageChange }) => {
             
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
+              className="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors p-2 mobile-touch-target"
+              aria-label="Toggle mobile menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {isMenuOpen ? (
@@ -124,16 +138,16 @@ const Navbar = ({ onPageChange }) => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden border-t border-gray-200/20 dark:border-gray-700/20 bg-white/10 dark:bg-gray-900/10 backdrop-blur-sm">
-            <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="md:hidden border-t border-gray-200/20 dark:border-gray-700/20 bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm mobile-optimized">
+            <div className="px-4 pt-2 pb-4 space-y-1">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => handlePageChange(link.id)}
-                  className={`block w-full text-left px-3 py-2 transition-colors duration-200 font-medium ${
-                    activePage === link.id
-                      ? 'text-blue-600 dark:text-blue-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
+                  className={`block w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-medium mobile-nav-item ${
+                    currentPage === link.id
+                      ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
+                      : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50'
                   }`}
                 >
                   {link.name}
