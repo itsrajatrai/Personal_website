@@ -92,9 +92,11 @@ const Hero = () => {
                 <p className={`text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium leading-relaxed`}>
                   {getTranslation(currentLanguage, 'hero.subtitle')}
                 </p>
-                <p className={`text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed`}>
-                  {getTranslation(currentLanguage, 'hero.description')}
-                </p>
+                <div className={`text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed space-y-2`}>
+                  {getTranslation(currentLanguage, 'hero.description').split('\n').map((line, index) => (
+                    <p key={index}>{line}</p>
+                  ))}
+                </div>
               </div>
             </div>
 

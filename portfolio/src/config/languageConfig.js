@@ -26,8 +26,8 @@ export const TRANSLATIONS = {
     // Hero Section
     hero: {
       title: 'Rajat Rai',
-      subtitle: 'Full-Stack Developer & Digital Creator',
-      description: 'Building meaningful digital experiences that connect people and solve real-world problems',
+      subtitle: 'Software Engineer at RedHat',
+      description: 'I write code, fix systems, and chase clean architecture.\nBut what I really enjoy is making digital stuff that feels useful, honest, and just a little bit magical.',
       recentWriting: 'Recent Writing',
       viewAllPosts: 'View all posts →',
       noPostsYet: 'No posts yet!',
@@ -38,12 +38,12 @@ export const TRANSLATIONS = {
     about: {
       title: 'About Me',
       subtitle: 'Get to know me better',
-      role: 'Full-Stack Developer',
+      role: 'Software Engineer at RedHat',
       content: {
-        p1: "Hi there! I'm Rajat, a passionate Full-Stack Developer and Digital Creator based in India. I love building meaningful digital experiences that connect people and solve real-world problems.",
-        p2: "With over 5 years of experience in web development, I've worked on everything from small business websites to large-scale applications. My expertise spans across the entire tech stack - from crafting beautiful user interfaces to building robust backend systems.",
-        p3: "When I'm not coding, you'll find me reading about the latest tech trends, contributing to open-source projects, or sharing my knowledge through blog posts and tutorials. I believe in continuous learning and staying up-to-date with the ever-evolving world of technology.",
-        p4: "I'm always excited to collaborate on interesting projects and connect with fellow developers. Whether you have a project idea, want to discuss technology, or just want to say hello, feel free to reach out!"
+        p1: "Hi, I'm Rajat — a software engineer at Red Hat where I mostly work in SRE, but what I really enjoy is building features that make things easier, more thoughtful, and worth learning from.",
+        p2: "Outside of work, I explore technology by creating side projects — things that are simple, elegant, and quietly robust. I believe good software doesn't have to shout; it just has to work, beautifully.",
+        p3: "I learn by reading, writing, and building. I'm drawn to clean systems, expressive languages (code and otherwise), and tools that respect both the user and the maker.",
+        p4: "Beyond code, I sing, cook, and study languages — especially classical Indian ones. I'm on a slow but steady transformation journey — not just as an engineer, but as a human being."
       }
     },
     
@@ -77,8 +77,8 @@ export const TRANSLATIONS = {
     
     // Status
     status: {
-      building: "Rajat is building something very cool!",
-      buildingMobile: "Building cool stuff!"
+      building: "Rajat is in the lab — expect sparks soon.",
+      buildingMobile: "In the lab — sparks coming!"
     }
   },
   
@@ -86,8 +86,8 @@ export const TRANSLATIONS = {
     // Hero Section
     hero: {
       title: 'रजत राय',
-      subtitle: 'फुल-स्टैक डेवलपर और डिजिटल क्रिएटर',
-      description: 'ऐसे सार्थक डिजिटल अनुभव बनाना जो लोगों को जोड़ते हैं और वास्तविक दुनिया की समस्याओं को हल करते हैं',
+      subtitle: 'रेडहैट में सॉफ्टवेयर इंजीनियर',
+      description: 'मैं code लिखता हूँ, systems का परिष्करण करता हूँ, और उत्तम architecture की साधना में लगा रहता हूँ।\nकिंतु मुझे वास्तविक आनंद तब प्राप्त होता है जब मैं ऐसा digital निर्माण करता हूँ जो उपयोगी हो, सत्यपरक हो, और थोड़ी-सी जादू जैसी अनुभूति कराए।',
       recentWriting: 'हाल की लेखनी',
       viewAllPosts: 'सभी पोस्ट देखें →',
       noPostsYet: 'अभी तक कोई पोस्ट नहीं!',
@@ -98,12 +98,12 @@ export const TRANSLATIONS = {
     about: {
       title: 'मेरे बारे में',
       subtitle: 'मुझे बेहतर तरीके से जानें',
-      role: 'फुल-स्टैक डेवलपर',
+      role: 'रेडहैट में सॉफ्टवेयर इंजीनियर',
       content: {
-        p1: "नमस्ते! मैं रजत हूं, भारत में रहने वाला एक जुनूनी फुल-स्टैक डेवलपर और डिजिटल क्रिएटर। मुझे ऐसे सार्थक डिजिटल अनुभव बनाना पसंद है जो लोगों को जोड़ते हैं और वास्तविक दुनिया की समस्याओं को हल करते हैं।",
-        p2: "वेब डेवलपमेंट में 5 साल से अधिक के अनुभव के साथ, मैंने छोटे व्यवसाय वेबसाइटों से लेकर बड़े पैमाने के एप्लिकेशन तक सब कुछ पर काम किया है। मेरी विशेषज्ञता पूरे टेक स्टैक में फैली हुई है - सुंदर यूजर इंटरफेस बनाने से लेकर मजबूत बैकएंड सिस्टम बनाने तक।",
-        p3: "जब मैं कोडिंग नहीं कर रहा होता, तो आप मुझे नवीनतम टेक ट्रेंड्स के बारे में पढ़ते हुए, ओपन-सोर्स प्रोजेक्ट्स में योगदान देते हुए, या ब्लॉग पोस्ट और ट्यूटोरियल के माध्यम से अपना ज्ञान साझा करते हुए पाएंगे। मैं निरंतर सीखने और तकनीक की बदलती दुनिया के साथ अपडेट रहने में विश्वास करता हूं।",
-        p4: "मैं हमेशा दिलचस्प प्रोजेक्ट्स पर सहयोग करने और साथी डेवलपर्स से जुड़ने के लिए उत्साहित रहता हूं। चाहे आपके पास कोई प्रोजेक्ट आइडिया हो, तकनीक पर चर्चा करना चाहते हों, या बस हैलो कहना चाहते हों, बेझिझक संपर्क करें!"
+        p1: "नमस्ते, मैं रजत हूँ — एक Software Engineer के रूप में Red Hat में कार्यरत हूँ, जहाँ मैं मुख्यतः SRE (Site Reliability Engineering) से जुड़े कार्य करता हूँ। मुझे ऐसे समाधान गढ़ना पसंद है जो जीवन को सरल बनाएं, विचारशील हों, और कुछ नया सीखने का अवसर दें।",
+        p2: "कार्य समय के अतिरिक्त, मैं अपने व्यक्तिगत projects के माध्यम से तकनीक की खोज करता हूँ — जो स्वभाव में सरल, स्वरूप में सुंदर, और मूल में सुदृढ़ हों। मेरा विश्वास है कि अच्छा software दिखावा नहीं करता — वह शांति से अपना कार्य निपुणता से करता है।",
+        p3: "मैं पढ़कर, लिखकर और स्वयं निर्माण करके सीखता हूँ। मुझे स्वच्छ systems, अभिव्यक्तिपूर्ण languages (चाहे वह code की हो या मानवीय), और ऐसे tools पसंद हैं जो उपयोगकर्ता तथा निर्माता — दोनों के प्रति संवेदनशील हों।",
+        p4: "Code से परे, मैं संगीत, भोजन, और भारतीय भाषाओं में गहरी रुचि रखता हूँ, विशेषकर शास्त्रीय परंपरा से जुड़ी भाषाओं में। यह यात्रा केवल एक कुशल अभियंता बनने की नहीं, बल्कि एक सजीव और सजग मनुष्य बनने की भी है।"
       }
     },
     
@@ -137,16 +137,16 @@ export const TRANSLATIONS = {
     
     // Status
     status: {
-      building: "रजत कुछ बहुत कूल बना रहा है!",
-      buildingMobile: "कूल स्टफ बना रहा है!"
+      building: "रजत प्रयोगशाला में है — जल्द ही चिंगारियाँ उड़ने वाली हैं!",
+      buildingMobile: "प्रयोगशाला में — चिंगारियाँ आ रही हैं!"
     }
   },
 
   bh: {
     hero: {
       title: 'रजत राय',
-      subtitle: 'फुल-स्टैक डेवलपर, ब्लॉगर, और कंटेंट क्रिएटर',
-      description: 'हमरा बारे में जानल जाव, प्रोजेक्ट देखल जाव, अउरी ब्लॉग पढ़ल जाव।',
+      subtitle: 'रेडहैट में सॉफ्टवेयर इंजीनियर',
+      description: 'हम code लिखेनी, system के सुधारेली, आ बढ़िया architecture के ओर मन लागल बा।\nबाकिर असली सुख त ओहमें बा, जब हम कुछ अइसन digital चीज बनाइ जवन सही में काम के होखे, साँच होखे, आ मन में थोड़ेक जादू जइसन असर छोड़ जाव।',
       recentWriting: 'हाल के लेख',
       loading: 'लोड हो रहल बा...',
       noPostsYet: 'अभी तक कौनो पोस्ट नइखे।',
@@ -155,12 +155,12 @@ export const TRANSLATIONS = {
     about: {
       title: 'हमार बारे में',
       subtitle: 'हमके बेहतर तरीक़ा से जानीं',
-      role: 'फुल-स्टैक डेवलपर',
+      role: 'रेडहैट में सॉफ्टवेयर इंजीनियर',
       content: {
-        p1: 'हम रजत राय बानी, एगो पैशन वाला फुल-स्टैक डेवलपर, ब्लॉगर, अउरी कंटेंट क्रिएटर। हम टेक्नोलॉजी, ओपन सोर्स, अउरी नॉलेज शेयरिंग में विश्वास करिला।',
-        p2: '',
-        p3: '',
-        p4: '',
+        p1: 'नमस्कार, हम रजत हई — एगो Software Engineer, जे Red Hat में SRE के काम करेनी। हमके अइसन चीज बनावे में मजा आवेला जे साँच में लोगन के काम आवे, कुछ आसान करे, आ कुछ सिखा दे।',
+        p2: 'काम के बाद, हम आपन मन से छोट-बड़ projects बनवनी — जे सादा होखे, नीमन लागे, आ टिकाव होखे। हम मानेली कि बढ़िया software के ज़रूरत नइखे कि ऊ चमके — बस आपन काम ढंग से कर दे।',
+        p3: 'हम पढ़ के, समझ के, आ खुद बना के सिखीनी। हमके साफ system, बोले लायक language (चाहे ऊ code होखे चाहे मनुष्य के बोली), आ अइसन tools पसंद बा जे इस्तेमाल करे वाला आ बनावे वाला दुनों के सोचे।',
+        p4: 'Code के अलावा, हम गाना सुननी, खाना बनवनी, आ भाषा में रुचि रखनी — ख़ास कर के पुरान जमाना के भारतीय भाषा में। हम engineer त हई, बाकिर असली बात ई बा कि धीरे-धीरे हम आपन सोच, काम आ जिनगी के अउरी बेहतर बनावे के राह पर बानी।',
       },
     },
     blog: {
@@ -181,13 +181,13 @@ export const TRANSLATIONS = {
       blog: 'ब्लॉग',
     },
     footer: {
-      letsTalk: 'कोई विचार बा या सहयोग करे के चाहत बानी?',
+      letsTalk: 'कोई विचार बा या सहयोग करे के चाह तानी?',
       letsTalkLink: 'बात करीं →',
       copyright: 'सर्वाधिकार सुरक्षित।',
     },
     status: {
-      building: 'रजत कुछ बहुत कूल बना रहल बा!',
-      buildingMobile: 'कूल स्टफ बना रहल बा!'
+      building: 'रजत लैब में बाँड़े — अब कुछ ना कुछ त धांसू होखे वाला बा !',
+      buildingMobile: 'लैब में बाँड़े — धांसू होखे वाला बा!'
     }
   }
 }
