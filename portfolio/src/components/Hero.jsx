@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { useBlogPosts } from '../hooks/useBlogPosts'
+import { useLanguage } from '../contexts/LanguageContext'
+import { getTranslation } from '../config/languageConfig'
 
 const Hero = () => {
   const [activeTab, setActiveTab] = useState('tech')
   const { posts, loading } = useBlogPosts()
+  const { currentLanguage } = useLanguage()
 
   // Utility to strip HTML tags from a string
   const stripHtml = (html) => {
@@ -76,7 +79,7 @@ const Hero = () => {
               </div>
               <div className="text-center sm:text-left">
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white leading-tight flex items-center justify-center sm:justify-start">
-                  Rajat Rai
+                  {getTranslation(currentLanguage, 'hero.title')}
                   <svg className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 ml-2 sm:ml-3 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                   </svg>
@@ -87,10 +90,10 @@ const Hero = () => {
             <div className="bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-gray-200/50 dark:border-gray-700/50 mb-6 sm:mb-8">
               <div className="space-y-3">
                 <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 font-medium leading-relaxed">
-                  Full-Stack Developer & Digital Creator
+                  {getTranslation(currentLanguage, 'hero.subtitle')}
                 </p>
                 <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
-                  Building meaningful digital experiences that connect people and solve real-world problems
+                  {getTranslation(currentLanguage, 'hero.description')}
                 </p>
               </div>
             </div>
@@ -133,7 +136,7 @@ const Hero = () => {
           <div className="max-w-lg mt-8 lg:mt-0">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
               <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white text-center sm:text-left">
-                Recent Writing
+                {getTranslation(currentLanguage, 'hero.recentWriting')}
               </h2>
               <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1 justify-center sm:justify-start">
                 <button
@@ -160,9 +163,9 @@ const Hero = () => {
             </div>
             <div className="space-y-4 sm:space-y-6">
               {loading ? (
-                <div className="text-gray-500 dark:text-gray-400 text-center">Loading...</div>
+                <div className="text-gray-500 dark:text-gray-400 text-center">{getTranslation(currentLanguage, 'hero.loading')}</div>
               ) : filteredBlogs.length === 0 ? (
-                <div className="text-gray-500 dark:text-gray-400 text-center">No posts yet!</div>
+                <div className="text-gray-500 dark:text-gray-400 text-center">{getTranslation(currentLanguage, 'hero.noPostsYet')}</div>
               ) : filteredBlogs.map((blog, index) => (
                 <div key={index} className="bg-white dark:bg-gray-800 rounded-lg p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 gap-2">
@@ -191,7 +194,7 @@ const Hero = () => {
             </div>
             <div className="mt-6 text-center sm:text-left">
               <a href="#" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'}) || window.dispatchEvent(new CustomEvent('navigateToBlog'))} className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium transition-colors">
-                View all posts →
+                {getTranslation(currentLanguage, 'hero.viewAllPosts')}
               </a>
             </div>
           </div>

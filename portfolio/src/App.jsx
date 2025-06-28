@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { LanguageProvider, useLanguage } from './contexts/LanguageContext'
+import { getTranslation } from './config/languageConfig'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Blog from './components/Blog'
 
-function App() {
+function AppContent() {
   const [currentPage, setCurrentPage] = useState('home')
+  const { currentLanguage } = useLanguage()
 
   useEffect(() => {
     const handler = () => setCurrentPage('blog')
@@ -41,24 +44,32 @@ function App() {
             {/* Let's Talk */}
             <div>
               <p className="text-gray-600 dark:text-gray-400 text-sm mb-1">
-                Have ideas or want to collaborate?
+                {getTranslation(currentLanguage, 'footer.letsTalk')}
               </p>
               <a 
                 href="mailto:rajat@example.com"
                 className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors font-medium"
               >
-                Let's Talk →
+                {getTranslation(currentLanguage, 'footer.letsTalkLink')}
               </a>
             </div>
 
             {/* Copyright */}
             <div className="text-gray-600 dark:text-gray-400 text-sm">
-              © {new Date().getFullYear()} Rajat Rai. All rights reserved.
+              © {new Date().getFullYear()} Rajat Rai. {getTranslation(currentLanguage, 'footer.copyright')}
             </div>
           </div>
         </div>
       </footer>
     </div>
+  )
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   )
 }
 

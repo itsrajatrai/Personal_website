@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
+import { getTranslation } from '../config/languageConfig'
+import LanguageSwitcher from './LanguageSwitcher'
 
 const Navbar = ({ onPageChange, currentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const { currentLanguage } = useLanguage()
 
   const navLinks = [
-    { id: 'home', name: 'Home', href: '#home' },
-    { id: 'about', name: 'About', href: '#about' },
-    { id: 'blog', name: 'Blog', href: '#blog' }
+    { id: 'home', name: getTranslation(currentLanguage, 'nav.home'), href: '#home' },
+    { id: 'about', name: getTranslation(currentLanguage, 'nav.about'), href: '#about' },
+    { id: 'blog', name: getTranslation(currentLanguage, 'nav.blog'), href: '#blog' }
   ]
 
   // Handle dark mode toggle
@@ -60,10 +64,10 @@ const Navbar = ({ onPageChange, currentPage }) => {
           <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 px-2 sm:px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
             <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
             <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium hidden sm:inline">
-              Rajat is building something very cool!
+              {getTranslation(currentLanguage, 'status.building')}
             </span>
             <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium sm:hidden">
-              Building cool stuff!
+              {getTranslation(currentLanguage, 'status.buildingMobile')}
             </span>
           </div>
 
@@ -99,6 +103,9 @@ const Navbar = ({ onPageChange, currentPage }) => {
                 </svg>
               )}
             </button>
+            
+            {/* Language Switcher */}
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
@@ -119,6 +126,9 @@ const Navbar = ({ onPageChange, currentPage }) => {
                 </svg>
               )}
             </button>
+            
+            {/* Language Switcher for Mobile */}
+            <LanguageSwitcher />
             
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}

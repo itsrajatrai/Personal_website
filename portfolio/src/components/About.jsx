@@ -1,6 +1,10 @@
 import React from 'react'
+import { useLanguage } from '../contexts/LanguageContext'
+import { getTranslation } from '../config/languageConfig'
 
 const About = () => {
+  const { currentLanguage } = useLanguage()
+
   return (
     <section className="section min-h-screen flex items-center justify-start bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 relative">
       <div className="container">
@@ -8,10 +12,10 @@ const About = () => {
           {/* Header */}
           <div className="text-center mb-6">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
-              About Me
+              {getTranslation(currentLanguage, 'about.title')}
             </h1>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-              Get to know me better
+              {getTranslation(currentLanguage, 'about.subtitle')}
             </p>
           </div>
 
@@ -37,13 +41,13 @@ const About = () => {
                 {/* Name and Verification */}
                 <div className="text-center">
                   <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white flex items-center justify-center">
-                    Rajat Rai
+                    {getTranslation(currentLanguage, 'hero.title')}
                     <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                   </h2>
                   <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">
-                    Full-Stack Developer
+                    {getTranslation(currentLanguage, 'about.role')}
                   </p>
                   
                   {/* Social Media Icons */}
@@ -86,19 +90,19 @@ const About = () => {
               <div className="flex-1 text-center lg:text-left">
                 <div className="space-y-3 sm:space-y-4">
                   <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                    Hi there! I'm Rajat, a passionate Full-Stack Developer and Digital Creator based in India. I love building meaningful digital experiences that connect people and solve real-world problems.
+                    {getTranslation(currentLanguage, 'about.content.p1')}
                   </p>
                   
                   <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                    With over 5 years of experience in web development, I've worked on everything from small business websites to large-scale applications. My expertise spans across the entire tech stack - from crafting beautiful user interfaces to building robust backend systems.
+                    {getTranslation(currentLanguage, 'about.content.p2')}
                   </p>
                   
                   <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                    When I'm not coding, you'll find me reading about the latest tech trends, contributing to open-source projects, or sharing my knowledge through blog posts and tutorials. I believe in continuous learning and staying up-to-date with the ever-evolving world of technology.
+                    {getTranslation(currentLanguage, 'about.content.p3')}
                   </p>
                   
                   <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-                    I'm always excited to collaborate on interesting projects and connect with fellow developers. Whether you have a project idea, want to discuss technology, or just want to say hello, feel free to reach out!
+                    {getTranslation(currentLanguage, 'about.content.p4')}
                   </p>
                 </div>
               </div>
