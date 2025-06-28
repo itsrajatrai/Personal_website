@@ -6,7 +6,11 @@ export default {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'kaithi': ['Noto Sans Kaithi', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 }; 

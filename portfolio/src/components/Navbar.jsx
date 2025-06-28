@@ -8,6 +8,9 @@ const Navbar = ({ onPageChange, currentPage }) => {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const { currentLanguage } = useLanguage()
 
+  // Apply Kaithi font for Bhojpuri language
+  const fontClass = currentLanguage === 'bh' ? 'font-kaithi' : ''
+
   const navLinks = [
     { id: 'home', name: getTranslation(currentLanguage, 'nav.home'), href: '#home' },
     { id: 'about', name: getTranslation(currentLanguage, 'nav.about'), href: '#about' },
@@ -63,10 +66,10 @@ const Navbar = ({ onPageChange, currentPage }) => {
           {/* Status Indicator */}
           <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 px-2 sm:px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
             <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium hidden sm:inline">
+            <span className={`text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium hidden sm:inline ${fontClass}`}>
               {getTranslation(currentLanguage, 'status.building')}
             </span>
-            <span className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium sm:hidden">
+            <span className={`text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium sm:hidden ${fontClass}`}>
               {getTranslation(currentLanguage, 'status.buildingMobile')}
             </span>
           </div>
@@ -77,7 +80,7 @@ const Navbar = ({ onPageChange, currentPage }) => {
               <button
                 key={link.id}
                 onClick={() => handlePageChange(link.id)}
-                className={`transition-colors duration-200 font-medium mobile-touch-target ${
+                className={`transition-colors duration-200 font-medium mobile-touch-target ${fontClass} ${
                   currentPage === link.id
                     ? 'text-blue-600 dark:text-blue-400'
                     : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
@@ -154,7 +157,7 @@ const Navbar = ({ onPageChange, currentPage }) => {
                 <button
                   key={link.id}
                   onClick={() => handlePageChange(link.id)}
-                  className={`block w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-medium mobile-nav-item ${
+                  className={`block w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 font-medium mobile-nav-item ${fontClass} ${
                     currentPage === link.id
                       ? 'text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20'
                       : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50'

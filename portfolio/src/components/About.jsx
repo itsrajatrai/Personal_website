@@ -5,16 +5,19 @@ import { getTranslation } from '../config/languageConfig'
 const About = () => {
   const { currentLanguage } = useLanguage()
 
+  // Apply Kaithi font for Bhojpuri language
+  const fontClass = currentLanguage === 'bh' ? 'font-kaithi' : ''
+
   return (
     <section className="section min-h-screen flex items-center justify-start bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 relative">
       <div className="container">
         <div className="max-w-5xl mx-auto">
           {/* Header */}
           <div className="text-center mb-6">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className={`text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2 ${fontClass}`}>
               {getTranslation(currentLanguage, 'about.title')}
             </h1>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
+            <p className={`text-sm sm:text-base text-gray-600 dark:text-gray-300 ${fontClass}`}>
               {getTranslation(currentLanguage, 'about.subtitle')}
             </p>
           </div>
@@ -40,13 +43,13 @@ const About = () => {
                 
                 {/* Name and Verification */}
                 <div className="text-center">
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white flex items-center justify-center">
+                  <h2 className={`text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white flex items-center justify-center ${fontClass}`}>
                     {getTranslation(currentLanguage, 'hero.title')}
                     <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-2 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                     </svg>
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs mt-1">
+                  <p className={`text-gray-600 dark:text-gray-400 text-xs mt-1 ${fontClass}`}>
                     {getTranslation(currentLanguage, 'about.role')}
                   </p>
                   
@@ -89,19 +92,19 @@ const About = () => {
               {/* Right Side - Content */}
               <div className="flex-1 text-center lg:text-left">
                 <div className="space-y-3 sm:space-y-4">
-                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <p className={`text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
                     {getTranslation(currentLanguage, 'about.content.p1')}
                   </p>
                   
-                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <p className={`text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
                     {getTranslation(currentLanguage, 'about.content.p2')}
                   </p>
                   
-                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <p className={`text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
                     {getTranslation(currentLanguage, 'about.content.p3')}
                   </p>
                   
-                  <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <p className={`text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
                     {getTranslation(currentLanguage, 'about.content.p4')}
                   </p>
                 </div>

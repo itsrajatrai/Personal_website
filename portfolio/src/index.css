@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Kaithi:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Kaithi:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,6 +16,19 @@
     @apply bg-white text-gray-900 dark:bg-gray-900 dark:text-white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Kaithi script font support */
+  .font-kaithi {
+    font-family: 'Noto Sans Devanagari', 'Devanagari MT', sans-serif;
+  }
+
+  /* Test element to verify font loading */
+  .kaithi-test {
+    font-family: 'Noto Sans Kaithi', 'Kaithi', 'Devanagari MT', 'Arial Unicode MS', 'Segoe UI', sans-serif;
+    font-size: 16px;
+    visibility: hidden;
+    position: absolute;
   }
 
   /* Improve touch targets on mobile */

@@ -10,6 +10,9 @@ function AppContent() {
   const [currentPage, setCurrentPage] = useState('home')
   const { currentLanguage } = useLanguage()
 
+  // Apply Kaithi font for Bhojpuri language
+  const fontClass = currentLanguage === 'bh' ? 'font-kaithi' : ''
+
   useEffect(() => {
     const handler = () => setCurrentPage('blog')
     window.addEventListener('navigateToBlog', handler)
@@ -43,19 +46,19 @@ function AppContent() {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between py-4 gap-4 text-center lg:text-left">
             {/* Let's Talk */}
             <div>
-              <p className="text-gray-600 dark:text-gray-400 text-sm mb-1">
+              <p className={`text-gray-600 dark:text-gray-400 text-sm mb-1 ${fontClass}`}>
                 {getTranslation(currentLanguage, 'footer.letsTalk')}
               </p>
               <a 
                 href="mailto:rajat@example.com"
-                className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors font-medium"
+                className={`text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors font-medium ${fontClass}`}
               >
                 {getTranslation(currentLanguage, 'footer.letsTalkLink')}
               </a>
             </div>
 
             {/* Copyright */}
-            <div className="text-gray-600 dark:text-gray-400 text-sm">
+            <div className={`text-gray-600 dark:text-gray-400 text-sm ${fontClass}`}>
               © {new Date().getFullYear()} Rajat Rai. {getTranslation(currentLanguage, 'footer.copyright')}
             </div>
           </div>
