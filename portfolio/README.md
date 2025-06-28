@@ -1,12 +1,52 @@
-# React + Vite
+# Rajat Rai - Personal Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my personal website! This is where I share my work, thoughts, and connect with the community.
 
-Currently, two official plugins are available:
+## ✨ What You'll Find Here
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 🏠 **Home**
+- Get to know me and what I do
+- See my recent blog posts and updates
+- Connect with me on social media
 
-## Expanding the ESLint configuration
+### 👨‍💻 **About Me**
+- Learn about my background and experience
+- Discover my interests and passions
+- See my professional journey
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 📝 **Blog**
+- Read my thoughts on technology and beyond
+- Explore both technical and non-technical posts
+- Stay updated with my latest insights
+
+## 🌟 Features
+
+- **Multi-language Support**: Available in English, Hindi, and Bhojpuri
+- **Dark Mode**: Easy on the eyes with a toggle option
+- **Mobile Friendly**: Works perfectly on all devices
+- **Fast Loading**: Optimized for quick access
+- **Social Integration**: Easy sharing and connection
+
+## 🎨 Design
+
+- Clean and modern interface
+- Smooth animations and transitions
+- Professional yet personal feel
+- Accessible for everyone
+
+## 📱 Connect With Me
+
+- **X (Twitter)**: [@ItsRajatRai](https://x.com/ItsRajatRai)
+- **YouTube**: [@Its_rajatrai](https://www.youtube.com/@Its_rajatrai)
+- **LinkedIn**: [itsrajatrai](https://www.linkedin.com/in/itsrajatrai/)
+- **Instagram**: [its_rajatrai](https://www.instagram.com/its_rajatrai/)
+- **GitHub**: [itsrajatrai](https://github.com/itsrajatrai)
+- **Email**: therajatraiofficial@gmail.com
+
+## 🚀 Visit My Website
+
+Check out my portfolio at: **[rajatrai.in](https://rajatrai.in)**
+
+---
+
+*This is my personal website showcasing my work and thoughts. Feel free to explore and get in touch!*
