@@ -23,6 +23,13 @@ export const LANGUAGES = {
 // Translations
 export const TRANSLATIONS = {
   en: {
+    // Page Titles
+    pageTitles: {
+      home: 'Rajat Rai',
+      about: 'Rajat Rai - About',
+      blog: 'Rajat Rai - Blog'
+    },
+    
     // Hero Section
     hero: {
       title: 'Rajat Rai',
@@ -83,6 +90,13 @@ export const TRANSLATIONS = {
   },
   
   hi: {
+    // Page Titles
+    pageTitles: {
+      home: 'रजत राय',
+      about: 'रजत राय - मेरे बारे में',
+      blog: 'रजत राय - ब्लॉग'
+    },
+    
     // Hero Section
     hero: {
       title: 'रजत राय',
@@ -143,6 +157,13 @@ export const TRANSLATIONS = {
   },
 
   bh: {
+    // Page Titles
+    pageTitles: {
+      home: 'रजत राय',
+      about: 'रजत राय - हमारे बारे में',
+      blog: 'रजत राय - ब्लॉग'
+    },
+    
     hero: {
       title: 'रजत राय',
       subtitle: 'रेडहैट में सॉफ्टवेयर इंजीनियर',

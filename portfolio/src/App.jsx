@@ -13,6 +13,12 @@ function AppContent() {
   // Apply Kaithi font for Bhojpuri language
   const fontClass = currentLanguage === 'bh' ? 'font-kaithi' : ''
 
+  // Update page title based on current page and language
+  useEffect(() => {
+    const pageTitle = getTranslation(currentLanguage, `pageTitles.${currentPage}`)
+    document.title = pageTitle
+  }, [currentPage, currentLanguage])
+
   useEffect(() => {
     const handler = () => setCurrentPage('blog')
     window.addEventListener('navigateToBlog', handler)
@@ -50,7 +56,7 @@ function AppContent() {
                 {getTranslation(currentLanguage, 'footer.letsTalk')}
               </p>
               <a 
-                href="mailto:rajat@example.com"
+                href="mailto:therajatraiofficial@gmail.com"
                 className={`text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors font-medium ${fontClass}`}
               >
                 {getTranslation(currentLanguage, 'footer.letsTalkLink')}
