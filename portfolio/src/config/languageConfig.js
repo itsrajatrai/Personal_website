@@ -68,6 +68,20 @@ export const TRANSLATIONS = {
       tryAgain: 'Try Again'
     },
     
+    // Redirect Section
+    redirect: {
+      redirecting: 'Redirecting to Blog Post',
+      loading: 'Loading...',
+      notFound: 'Blog Post Not Found',
+      notFoundDesc: 'The blog post you are looking for does not exist.',
+      goHome: 'Go Home',
+      redirectingTo: 'Redirecting to',
+      countdown: 'Redirecting in',
+      seconds: 'seconds',
+      redirectNow: 'Redirect Now',
+      cancel: 'Cancel'
+    },
+    
     // Navigation
     nav: {
       home: 'Home',
@@ -135,6 +149,20 @@ export const TRANSLATIONS = {
       tryAgain: 'फिर से कोशिश करें'
     },
     
+    // Redirect Section
+    redirect: {
+      redirecting: 'ब्लॉग पोस्ट पर पुनर्निर्देशित कर रहे हैं',
+      loading: 'लोड हो रहा है...',
+      notFound: 'ब्लॉग पोस्ट नहीं मिली',
+      notFoundDesc: 'आप जिस ब्लॉग पोस्ट की तलाश कर रहे हैं वह मौजूद नहीं है।',
+      goHome: 'होम पर जाएं',
+      redirectingTo: 'पुनर्निर्देशित कर रहे हैं',
+      countdown: 'पुनर्निर्देशित हो रहा है',
+      seconds: 'सेकंड में',
+      redirectNow: 'अभी पुनर्निर्देशित करें',
+      cancel: 'रद्द करें'
+    },
+    
     // Navigation
     nav: {
       home: 'होम',
@@ -196,6 +224,21 @@ export const TRANSLATIONS = {
       error: 'पोस्ट लोड करे में त्रुटि',
       tryAgain: 'फिर से कोशिश करीं',
     },
+    
+    // Redirect Section
+    redirect: {
+      redirecting: 'ब्लॉग पोस्ट पर भेज रहल बानी',
+      loading: 'लोड हो रहल बा...',
+      notFound: 'ब्लॉग पोस्ट ना मिलल',
+      notFoundDesc: 'जे ब्लॉग पोस्ट तानी ढूंढ रहल बानी ऊ मौजूद नइखे।',
+      goHome: 'होम पर जाइं',
+      redirectingTo: 'भेज रहल बानी',
+      countdown: 'भेज रहल बानी',
+      seconds: 'सेकंड में',
+      redirectNow: 'अभी भेजीं',
+      cancel: 'रद्द करीं'
+    },
+    
     nav: {
       home: 'होम',
       about: 'हमार बारे में',
