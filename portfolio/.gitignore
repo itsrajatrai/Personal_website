@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Blog redirect documentation (not needed in production)
+BLOG_REDIRECT_README.md
