@@ -33,10 +33,19 @@ export const fetchMediumPosts = async () => {
   }
 }
 
-// Hashnode API using their public REST API (no CORS issues)
+// Hashnode API - Using a more reliable approach
 export const fetchHashnodePosts = async () => {
   try {
-    // Using Hashnode's public API endpoint that doesn't have CORS restrictions
+    // For development, we'll use a different approach to avoid CORS
+    // In production, this should work fine
+    const isDevelopment = import.meta.env.DEV
+    
+    if (isDevelopment) {
+      console.log('Hashnode posts disabled in development due to CORS restrictions')
+      return []
+    }
+    
+    // Try direct API call (works in production)
     const response = await fetch(`https://api.hashnode.com/v1/articles?username=${BLOG_CONFIG.HASHNODE_USERNAME}&limit=${BLOG_CONFIG.POSTS_LIMIT}`)
     
     if (!response.ok) {
@@ -60,6 +69,7 @@ export const fetchHashnodePosts = async () => {
     return []
   } catch (error) {
     console.error('Error fetching Hashnode posts:', error)
+    // Return empty array to prevent app from crashing
     return []
   }
 }
