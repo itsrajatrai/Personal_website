@@ -7,48 +7,72 @@ import Hero from './components/Hero'
 import About from './components/About'
 import Blog from './components/Blog'
 import BlogRedirect from './components/BlogRedirect'
+import NotFound from './components/NotFound'
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState('home')
   const [blogSlug, setBlogSlug] = useState(null)
+  const [notFound, setNotFound] = useState(false)
   const { currentLanguage } = useLanguage()
 
   // Apply Kaithi font for Bhojpuri language
   const fontClass = currentLanguage === 'bh' ? 'font-kaithi' : ''
 
-  // Check for blog redirect URLs on component mount and URL changes
+  // Check for blog redirect URLs or unknown routes
   useEffect(() => {
-    const checkForBlogRedirect = () => {
+    const path = window.location.pathname
+    const slug = path.substring(1)
+    // Known pages
+    const knownPages = ['', 'about', 'blog']
+    if (slug && hasRedirect(slug)) {
+      setBlogSlug(slug)
+      setCurrentPage('redirect')
+      setNotFound(false)
+    } else if (knownPages.includes(slug)) {
+      setBlogSlug(null)
+      setCurrentPage(slug === '' ? 'home' : slug)
+      setNotFound(false)
+    } else if (slug !== '') {
+      setBlogSlug(null)
+      setCurrentPage('notfound')
+      setNotFound(true)
+    } else {
+      setBlogSlug(null)
+      setCurrentPage('home')
+      setNotFound(false)
+    }
+    // Listen for popstate events (back/forward navigation)
+    const handlePopState = () => {
       const path = window.location.pathname
-      
-      // Remove leading slash and check if it's a blog redirect
       const slug = path.substring(1)
-      
       if (slug && hasRedirect(slug)) {
         setBlogSlug(slug)
         setCurrentPage('redirect')
+        setNotFound(false)
+      } else if (knownPages.includes(slug)) {
+        setBlogSlug(null)
+        setCurrentPage(slug === '' ? 'home' : slug)
+        setNotFound(false)
+      } else if (slug !== '') {
+        setBlogSlug(null)
+        setCurrentPage('notfound')
+        setNotFound(true)
       } else {
         setBlogSlug(null)
-        // Don't override currentPage if it's not a redirect
-        // This allows navbar navigation to work properly
+        setCurrentPage('home')
+        setNotFound(false)
       }
     }
-
-    checkForBlogRedirect()
-
-    // Listen for popstate events (back/forward navigation)
-    const handlePopState = () => {
-      checkForBlogRedirect()
-    }
-
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
-  }, []) // Remove currentPage dependency to prevent interference
+  }, [])
 
   // Update page title based on current page and language
   useEffect(() => {
     if (currentPage === 'redirect') {
       document.title = getTranslation(currentLanguage, 'pageTitles.blog')
+    } else if (currentPage === 'notfound') {
+      document.title = '404 - Page Not Found'
     } else {
       const pageTitle = getTranslation(currentLanguage, `pageTitles.${currentPage}`)
       document.title = pageTitle
@@ -69,6 +93,8 @@ function AppContent() {
         return <Blog />
       case 'redirect':
         return <BlogRedirect slug={blogSlug} />
+      case 'notfound':
+        return <NotFound />
       default:
         return <Hero />
     }
