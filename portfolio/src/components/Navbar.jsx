@@ -31,15 +31,16 @@ const Navbar = ({ onPageChange, currentPage }) => {
     }
   }
 
-  // Initialize theme on component mount
+  // Initialize theme on component mount - Dark mode as default
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
     
+    // Default to dark mode unless user explicitly chose light mode
     if (savedTheme === 'light') {
       setIsDarkMode(false)
       document.documentElement.classList.remove('dark')
     } else {
-      // Default to dark mode
+      // Default to dark mode (including when no preference is saved)
       setIsDarkMode(true)
       document.documentElement.classList.add('dark')
       localStorage.setItem('theme', 'dark')
