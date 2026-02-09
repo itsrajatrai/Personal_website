@@ -3,7 +3,7 @@
 // Generated on: 2025-06-30T02:49:51.376Z
 
 export const BLOG_REDIRECTS = {
-    'my-first-international-talk-experience-at-devops-con-singapore-2023': {
+    'Understanding Dharma': {
       url: 'https://medium.com/@itsrajatrai/understanding-dharma-why-every-choice-matters-da75ee932a76',
       platform: 'medium',
       title: 'Understanding Dharma: Why Every Choice Matters'
