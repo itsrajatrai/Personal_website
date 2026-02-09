@@ -4,7 +4,7 @@
 
 export const BLOG_REDIRECTS = {
     'Understanding-Dharma-Why-Every-Choice-Matters': {
-      url: 'https://medium.com/@itsrajatrai/understanding-dharma-why-every-choice-matters-da75ee932a76',
+      url: 'https://medium.com/@itsrajatrai/understanding-dharma-why-every-choice-matters-da75ee932a76?postPublishedType=repub',
       platform: 'medium',
       title: 'Understanding Dharma: Why Every Choice Matters'
     }
