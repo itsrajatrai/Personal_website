@@ -1,0 +1,41 @@
+{
+  "username": "itsrajatrai",
+  "fetchedAt": "2026-10-06T13:57:38.469Z",
+  "badges": [
+    {
+      "id": "9974ebc3-a26a-4239-9189-98278576f10e",
+      "name": "LFC102: Inclusive Open Source Community Orientation",
+      "issuer": "The Linux Foundation",
+      "issuedAt": "2026-08-18",
+      "expiresAt": null,
+      "image": "https://images.credly.com/images/4c923ac7-3490-4198-8ee6-fa9d3eb99b0d/blob",
+      "description": "Earners of the LFC102: Inclusive Open Source Community Orientation understand the importance of diversity for innovation, the basics of unconscious and societal bias, and how to recognize the different ways unconscious bias presents itself in technical environments. They possess the knowledge and skills to accept, appreciate, and include people of differing races, ethnicities, genders, ages, abilities and other identity categories and promote inclusivity and diversity in open source communities.",
+      "skills": [
+        "Diversity",
+        "Inclusive Culture",
+        "Open Source",
+        "Open Source Community",
+        "Societal Bias",
+        "Unconscious Bias"
+      ],
+      "url": "https://www.credly.com/badges/9974ebc3-a26a-4239-9189-98278576f10e"
+    },
+    {
+      "id": "5cb0257b-0588-440d-86e2-dda60bbfed47",
+      "name": "Zero to Merge - Cohort 02",
+      "issuer": "The Linux Foundation",
+      "issuedAt": "2024-10-11",
+      "expiresAt": null,
+      "image": "https://images.credly.com/images/305177f2-e888-45d9-b395-ce46a8979965/blob",
+      "description": "This badge is awarded to individuals who have successfully completed the Zero to Merge program, a four-week intensive program designed by the Cloud Native Computing Foundation (CNCF). The program equips participants with the skills and knowledge required to effectively engage with CNCF project maintainers, identify challenges within the cloud native ecosystem, collaborate on open GitHub issues, and contribute through Pull Requests (PRs).",
+      "skills": [
+        "Cloud Native Technologies",
+        "Creativity",
+        "Diversity",
+        "Innovation",
+        "Open Source Collaboration"
+      ],
+      "url": "https://www.credly.com/badges/5cb0257b-0588-440d-86e2-dda60bbfed47"
+    }
+  ]
+}

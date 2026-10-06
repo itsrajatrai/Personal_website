@@ -27,7 +27,11 @@ export const TRANSLATIONS = {
     pageTitles: {
       home: 'Rajat Rai',
       about: 'Rajat Rai - About',
-      blog: 'Rajat Rai - Blog'
+      blog: 'Rajat Rai - Writing',
+      talks: 'Rajat Rai - Talks & Judging',
+      studio: 'Rajat Rai - Studio',
+      certifications: 'Rajat Rai - Certifications',
+      work: 'Rajat Rai - Work'
     },
     
     // Hero Section
@@ -56,8 +60,8 @@ export const TRANSLATIONS = {
     
     // Blog Section
     blog: {
-      title: 'Blog',
-      subtitle: 'Thoughts, ideas, and insights on technology and beyond',
+      title: 'Writing',
+      subtitle: 'Notes on systems, technology, leverage, and life',
       techPosts: 'Tech Posts',
       nonTechPosts: 'Non-Tech Posts',
       comingSoon: 'Coming Soon',
@@ -66,6 +70,26 @@ export const TRANSLATIONS = {
       loading: 'Loading blog posts...',
       error: 'Error Loading Posts',
       tryAgain: 'Try Again'
+    },
+
+    talks: {
+      title: 'Talks & Judging',
+      subtitle: 'Conference talks, university sessions, and hackathons I’ve judged or mentored, on systems, AI, and engineering leverage.'
+    },
+
+    content: {
+      title: 'Studio',
+      subtitle: 'Videos and short-form pieces on technology and beyond. Two tracks, one lens: how systems really work.'
+    },
+
+    certifications: {
+      title: 'Certifications',
+      subtitle: 'Verified credentials, pulled from Credly.'
+    },
+
+    work: {
+      title: 'Work',
+      subtitle: 'Things I have built, and the patterns behind them.'
     },
     
     // Redirect Section
@@ -86,7 +110,11 @@ export const TRANSLATIONS = {
     nav: {
       home: 'Home',
       about: 'About',
-      blog: 'Blog'
+      blog: 'Writing',
+      content: 'Studio',
+      certifications: 'Certifications',
+      work: 'Work',
+      talks: 'Talks'
     },
     
     // Footer
@@ -108,7 +136,11 @@ export const TRANSLATIONS = {
     pageTitles: {
       home: 'रजत राय',
       about: 'रजत राय - मेरे बारे में',
-      blog: 'रजत राय - ब्लॉग'
+      blog: 'रजत राय - लेखन',
+      talks: 'रजत राय - वार्ताएँ और निर्णायक',
+      studio: 'रजत राय - स्टूडियो',
+      certifications: 'रजत राय - प्रमाणपत्र',
+      work: 'रजत राय - काम'
     },
     
     // Hero Section
@@ -137,8 +169,8 @@ export const TRANSLATIONS = {
     
     // Blog Section
     blog: {
-      title: 'ब्लॉग',
-      subtitle: 'तकनीक और उससे परे के बारे में विचार, विचार और अंतर्दृष्टि',
+      title: 'लेखन',
+      subtitle: 'सिस्टम, तकनीक, लीवरेज और जीवन पर संक्षिप्त नोट्स',
       techPosts: 'टेक पोस्ट',
       nonTechPosts: 'गैर-टेक पोस्ट',
       comingSoon: 'जल्द आ रहा है',
@@ -147,6 +179,26 @@ export const TRANSLATIONS = {
       loading: 'ब्लॉग पोस्ट लोड हो रहे हैं...',
       error: 'पोस्ट लोड करने में त्रुटि',
       tryAgain: 'फिर से कोशिश करें'
+    },
+
+    talks: {
+      title: 'वार्ताएँ और निर्णायक',
+      subtitle: 'Conference talks, university sessions, और वे hackathons जिनमें मैं निर्णायक या mentor रहा: systems, AI, और engineering leverage पर।'
+    },
+
+    content: {
+      title: 'स्टूडियो',
+      subtitle: 'तकनीक और उससे परे पर वीडियो और छोटे पीस। दो धाराएँ, एक दृष्टि: systems वास्तव में कैसे काम करते हैं।'
+    },
+
+    certifications: {
+      title: 'प्रमाणपत्र',
+      subtitle: 'Credly से लिए गए सत्यापित प्रमाणपत्र।'
+    },
+
+    work: {
+      title: 'काम',
+      subtitle: 'जो मैंने बनाया है, और उसके पीछे के पैटर्न।'
     },
     
     // Redirect Section
@@ -167,7 +219,11 @@ export const TRANSLATIONS = {
     nav: {
       home: 'होम',
       about: 'मेरे बारे में',
-      blog: 'ब्लॉग'
+      blog: 'लेखन',
+      content: 'स्टूडियो',
+      certifications: 'प्रमाणपत्र',
+      work: 'काम',
+      talks: 'वार्ताएँ'
     },
     
     // Footer
@@ -189,7 +245,11 @@ export const TRANSLATIONS = {
     pageTitles: {
       home: 'रजत राय',
       about: 'रजत राय - हमारे बारे में',
-      blog: 'रजत राय - ब्लॉग'
+      blog: 'रजत राय - लेखन',
+      talks: 'रजत राय - वार्ता आ निर्णायक',
+      studio: 'रजत राय - स्टूडियो',
+      certifications: 'रजत राय - प्रमाणपत्र',
+      work: 'रजत राय - काम'
     },
     
     hero: {
@@ -213,8 +273,8 @@ export const TRANSLATIONS = {
       },
     },
     blog: {
-      title: 'ब्लॉग',
-      subtitle: 'टेक्नोलॉजी अउरी बाकी चीज़न पर विचार',
+      title: 'लेखन',
+      subtitle: 'सिस्टम, टेक्नोलॉजी, लीवरेज आ जिनगी पर छोट नोट्स',
       techPosts: 'टेक पोस्ट',
       nonTechPosts: 'नॉन-टेक पोस्ट',
       comingSoon: 'जल्द आ रहल बा',
@@ -223,6 +283,26 @@ export const TRANSLATIONS = {
       loading: 'ब्लॉग पोस्ट लोड हो रहल बा...',
       error: 'पोस्ट लोड करे में त्रुटि',
       tryAgain: 'फिर से कोशिश करीं',
+    },
+
+    talks: {
+      title: 'वार्ता आ निर्णायक',
+      subtitle: 'Conference talks, university sessions, आ ऊ hackathons जवना में हम निर्णायक भा mentor रहनी: systems, AI, आ engineering leverage पर।'
+    },
+
+    content: {
+      title: 'स्टूडियो',
+      subtitle: 'टेक्नोलॉजी आ ओकरा से आगे पर वीडियो आ छोट पीस। दू धारा, एक नजर: systems असल में कइसे चलेला।'
+    },
+
+    certifications: {
+      title: 'प्रमाणपत्र',
+      subtitle: 'Credly से लिहल गइल सत्यापित प्रमाणपत्र।'
+    },
+
+    work: {
+      title: 'काम',
+      subtitle: 'जवन हम बनवले बानी, आ ओकरा पीछे के पैटर्न।'
     },
     
     // Redirect Section
@@ -242,7 +322,11 @@ export const TRANSLATIONS = {
     nav: {
       home: 'होम',
       about: 'हमार बारे में',
-      blog: 'ब्लॉग',
+      blog: 'लेखन',
+      content: 'स्टूडियो',
+      certifications: 'प्रमाणपत्र',
+      work: 'काम',
+      talks: 'वार्ता',
     },
     footer: {
       letsTalk: 'कोई विचार बा या सहयोग करे के चाह तानी?',

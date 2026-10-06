@@ -14,7 +14,11 @@ const Navbar = ({ onPageChange, currentPage }) => {
   const navLinks = [
     { id: 'home', name: getTranslation(currentLanguage, 'nav.home'), href: '#home' },
     { id: 'about', name: getTranslation(currentLanguage, 'nav.about'), href: '#about' },
-    { id: 'blog', name: getTranslation(currentLanguage, 'nav.blog'), href: '#blog' }
+    { id: 'work', name: getTranslation(currentLanguage, 'nav.work'), href: '#work' },
+    { id: 'blog', name: getTranslation(currentLanguage, 'nav.blog'), href: '#blog' },
+    { id: 'talks', name: getTranslation(currentLanguage, 'nav.talks'), href: '#talks' },
+    { id: 'studio', name: getTranslation(currentLanguage, 'nav.content'), href: '#studio' },
+    { id: 'certifications', name: getTranslation(currentLanguage, 'nav.certifications'), href: '#certifications' }
   ]
 
   // Handle dark mode toggle

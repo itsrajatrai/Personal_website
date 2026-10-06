@@ -7,6 +7,9 @@ export const BLOG_CONFIG = {
   
   // Your Hashnode username
   HASHNODE_USERNAME: 'itsrajatrai',
+
+  // Hashnode's GraphQL API is Pro-only, so posts are read from the public RSS feed
+  HASHNODE_BLOG_URL: 'https://rajatrai.hashnode.dev',
   
   // Number of posts to fetch (optional, some APIs support this)
   POSTS_LIMIT: 10,
@@ -24,6 +27,10 @@ export const BLOG_CONFIG = {
 // Helper function to get Medium RSS URL
 export const getMediumRSSUrl = (username) => {
   return `${BLOG_CONFIG.ENDPOINTS.MEDIUM_RSS}?rss_url=https://medium.com/feed/@${username}`
+}
+
+export const getHashnodeRSSUrl = () => {
+  return `${BLOG_CONFIG.ENDPOINTS.MEDIUM_RSS}?rss_url=${BLOG_CONFIG.HASHNODE_BLOG_URL}/rss.xml`
 }
 
 // Helper function to get Hashnode REST URL
