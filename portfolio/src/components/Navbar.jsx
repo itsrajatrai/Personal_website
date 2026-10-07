@@ -3,6 +3,8 @@ import { useLanguage } from '../contexts/LanguageContext'
 import { getTranslation } from '../config/languageConfig'
 import LanguageSwitcher from './LanguageSwitcher'
 
+const HOUR = 60 * 60 * 1000
+
 const Navbar = ({ onPageChange, currentPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -14,7 +16,11 @@ const Navbar = ({ onPageChange, currentPage }) => {
   const navLinks = [
     { id: 'home', name: getTranslation(currentLanguage, 'nav.home'), href: '#home' },
     { id: 'about', name: getTranslation(currentLanguage, 'nav.about'), href: '#about' },
-    { id: 'blog', name: getTranslation(currentLanguage, 'nav.blog'), href: '#blog' }
+    { id: 'work', name: getTranslation(currentLanguage, 'nav.work'), href: '#work' },
+    { id: 'blog', name: getTranslation(currentLanguage, 'nav.blog'), href: '#blog' },
+    { id: 'talks', name: getTranslation(currentLanguage, 'nav.talks'), href: '#talks' },
+    { id: 'studio', name: getTranslation(currentLanguage, 'nav.content'), href: '#studio' },
+    { id: 'certifications', name: getTranslation(currentLanguage, 'nav.certifications'), href: '#certifications' }
   ]
 
   // Handle dark mode toggle
@@ -47,6 +53,17 @@ const Navbar = ({ onPageChange, currentPage }) => {
     }
   }, [])
 
+  // The status follows the clock: one per hour, the same for every visitor, advancing on the hour.
+  const statuses = getTranslation(currentLanguage, 'status.items')
+  const [hour, setHour] = useState(() => Math.floor(Date.now() / HOUR))
+
+  useEffect(() => {
+    const timer = setTimeout(() => setHour(Math.floor(Date.now() / HOUR)), HOUR - (Date.now() % HOUR) + 1000)
+    return () => clearTimeout(timer)
+  }, [hour])
+
+  const [statusDesktop, statusMobile] = statuses[hour % statuses.length]
+
   // Close mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -72,10 +89,10 @@ const Navbar = ({ onPageChange, currentPage }) => {
           <div className="flex items-center space-x-2 bg-white dark:bg-gray-800 px-2 sm:px-3 py-1 rounded-full border border-gray-200 dark:border-gray-700">
             <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full animate-pulse"></div>
             <span className={`text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium hidden sm:inline ${fontClass}`}>
-              {getTranslation(currentLanguage, 'status.building')}
+              {statusDesktop}
             </span>
             <span className={`text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium sm:hidden ${fontClass}`}>
-              {getTranslation(currentLanguage, 'status.buildingMobile')}
+              {statusMobile}
             </span>
           </div>
 

@@ -1,5 +1,5 @@
 // Blog service for fetching posts from Medium and Hashnode
-import { BLOG_CONFIG, getMediumRSSUrl, getHashnodeRESTUrl } from '../config/blogConfig'
+import { BLOG_CONFIG, getMediumRSSUrl, getHashnodeRESTUrl, getHashnodeRSSUrl } from '../config/blogConfig'
 
 // Medium API - Using RSS feed since Medium doesn't have a public API
 export const fetchMediumPosts = async () => {
@@ -33,36 +33,25 @@ export const fetchMediumPosts = async () => {
   }
 }
 
-// Hashnode API - Using a more reliable approach
 export const fetchHashnodePosts = async () => {
   try {
-    // For development, we'll use a different approach to avoid CORS
-    // In production, this should work fine
-    const isDevelopment = import.meta.env.DEV
-    
-    if (isDevelopment) {
-      console.log('Hashnode posts disabled in development due to CORS restrictions')
-      return []
-    }
-    
-    // Try direct API call (works in production)
-    const response = await fetch(`https://api.hashnode.com/v1/articles?username=${BLOG_CONFIG.HASHNODE_USERNAME}&limit=${BLOG_CONFIG.POSTS_LIMIT}`)
-    
+    const response = await fetch(getHashnodeRSSUrl())
+
     if (!response.ok) {
       throw new Error(`Failed to fetch Hashnode posts: ${response.status}`)
     }
 
     const data = await response.json()
-    
-    if (data.articles && Array.isArray(data.articles)) {
-      return data.articles.map(article => ({
-        id: article._id,
-        title: article.title,
-        brief: article.brief,
-        url: article.url,
-        dateAdded: article.dateAdded,
-        thumbnail: article.coverImage,
-        tags: article.tags || []
+
+    if (data.status === 'ok' && Array.isArray(data.items)) {
+      return data.items.slice(0, BLOG_CONFIG.POSTS_LIMIT).map(item => ({
+        id: item.guid || item.link,
+        title: item.title,
+        brief: item.description,
+        url: item.link,
+        dateAdded: item.pubDate,
+        thumbnail: item.thumbnail || item.enclosure?.link || null,
+        tags: item.categories || []
       }))
     }
 

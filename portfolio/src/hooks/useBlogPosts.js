@@ -17,7 +17,7 @@ export const useBlogPosts = () => {
         const cacheTime = localStorage.getItem('blogPostsTime')
         const cacheVersion = localStorage.getItem('blogPostsVersion')
         const now = Date.now()
-        const currentVersion = '1.0' // Increment this when you make changes
+        const currentVersion = '1.1' // Increment this when you make changes
         
         // Use cache if it's less than 5 minutes old and version matches
         if (cached && cacheTime && cacheVersion === currentVersion && (now - parseInt(cacheTime)) < 5 * 60 * 1000) {
@@ -60,7 +60,7 @@ export const useBlogPosts = () => {
       // Cache the results
       localStorage.setItem('blogPosts', JSON.stringify(data))
       localStorage.setItem('blogPostsTime', Date.now().toString())
-      localStorage.setItem('blogPostsVersion', '1.0')
+      localStorage.setItem('blogPostsVersion', '1.1')
       
       setPosts(data)
     } catch (err) {

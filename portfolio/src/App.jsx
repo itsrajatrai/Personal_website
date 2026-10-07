@@ -6,6 +6,10 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Blog from './components/Blog'
+import Talks from './components/Talks'
+import Content from './components/Content'
+import Certifications from './components/Certifications'
+import Work from './components/Work'
 import BlogRedirect from './components/BlogRedirect'
 import NotFound from './components/NotFound'
 
@@ -23,7 +27,7 @@ function AppContent() {
     const path = window.location.pathname
     const slug = path.substring(1)
     // Known pages
-    const knownPages = ['', 'about', 'blog']
+    const knownPages = ['', 'about', 'work', 'blog', 'talks', 'studio', 'certifications']
     if (slug && hasRedirect(slug)) {
       setBlogSlug(slug)
       setCurrentPage('redirect')
@@ -79,18 +83,40 @@ function AppContent() {
     }
   }, [currentPage, currentLanguage, blogSlug])
 
+  const navigateTo = (pageId) => {
+    setBlogSlug(null)
+    setNotFound(false)
+    setCurrentPage(pageId)
+    const path = pageId === 'home' ? '/' : `/${pageId}`
+    window.history.pushState({}, '', path)
+    window.scrollTo({ top: 0 })
+  }
+
   useEffect(() => {
-    const handler = () => setCurrentPage('blog')
-    window.addEventListener('navigateToBlog', handler)
-    return () => window.removeEventListener('navigateToBlog', handler)
+    const toBlog = () => navigateTo('blog')
+    const toPage = (e) => navigateTo(e.detail)
+    window.addEventListener('navigateToBlog', toBlog)
+    window.addEventListener('navigateTo', toPage)
+    return () => {
+      window.removeEventListener('navigateToBlog', toBlog)
+      window.removeEventListener('navigateTo', toPage)
+    }
   }, [])
 
   const renderPage = () => {
     switch(currentPage) {
       case 'about':
         return <About />
+      case 'work':
+        return <Work />
       case 'blog':
         return <Blog />
+      case 'talks':
+        return <Talks />
+      case 'studio':
+        return <Content />
+      case 'certifications':
+        return <Certifications />
       case 'redirect':
         return <BlogRedirect slug={blogSlug} />
       case 'notfound':
@@ -112,7 +138,7 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 flex flex-col">
       {/* Fixed Navbar at top */}
-      <Navbar onPageChange={setCurrentPage} currentPage={currentPage} />
+      <Navbar onPageChange={navigateTo} currentPage={currentPage} />
       
       {/* Main content area - takes remaining space */}
       <main className="flex-1 pt-16">

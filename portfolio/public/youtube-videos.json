@@ -1,0 +1,43 @@
+{
+  "fetchedAt": "2026-10-07T04:41:25.563Z",
+  "channels": {
+    "tech": {
+      "handle": "Its_rajatrai",
+      "channelId": "UCZS7gs-qB5di6-e863XXdow",
+      "videos": []
+    },
+    "beyond": {
+      "handle": "itscuriousrajat",
+      "channelId": "UCENERkKrss8_BokFYWQac0w",
+      "videos": [
+        {
+          "id": "w6LAMbFvORc",
+          "title": "How India Went From Food Shortage to the Green Revolution 🇮🇳🌾",
+          "url": "https://www.youtube.com/shorts/w6LAMbFvORc",
+          "short": true,
+          "publishedAt": "2026-09-05T10:34:58+00:00",
+          "thumbnail": "https://i.ytimg.com/vi/w6LAMbFvORc/maxresdefault.jpg",
+          "fallback": "https://i.ytimg.com/vi/w6LAMbFvORc/hqdefault.jpg"
+        },
+        {
+          "id": "x5cRrl2H8v4",
+          "title": "India Mein Scooter Ke Liye 10 Saal Wait Kyun? 💀 | License Raj Explained  #economy #india",
+          "url": "https://www.youtube.com/shorts/x5cRrl2H8v4",
+          "short": true,
+          "publishedAt": "2026-08-20T14:51:07+00:00",
+          "thumbnail": "https://i.ytimg.com/vi/x5cRrl2H8v4/maxresdefault.jpg",
+          "fallback": "https://i.ytimg.com/vi/x5cRrl2H8v4/hqdefault.jpg"
+        },
+        {
+          "id": "H-nDdmM2fkw",
+          "title": "How did one of India’s most powerful regions go from ancient prosperity to economic backwardness?",
+          "url": "https://www.youtube.com/shorts/H-nDdmM2fkw",
+          "short": true,
+          "publishedAt": "2026-08-15T21:45:23+00:00",
+          "thumbnail": "https://i.ytimg.com/vi/H-nDdmM2fkw/maxresdefault.jpg",
+          "fallback": "https://i.ytimg.com/vi/H-nDdmM2fkw/hqdefault.jpg"
+        }
+      ]
+    }
+  }
+}
