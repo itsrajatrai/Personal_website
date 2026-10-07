@@ -10,12 +10,10 @@ const ICONS = {
 }
 
 // Latest videos per track come from public/youtube-videos.json, written by scripts/fetch-youtube.mjs.
+// Title, description and topics for each track live in languageConfig under `content.tracks.<id>`.
 const tracks = [
   {
     id: 'tech',
-    title: 'TECH',
-    description: 'How software actually works in production: reliability, systems design, engineering after AI, and the craft of building durable things.',
-    topics: ['Systems design', 'Reliability', 'AI and engineering', 'Open source', 'Career leverage'],
     channels: [
       { label: 'YouTube', href: 'https://www.youtube.com/@Its_rajatrai' },
       { label: 'Instagram', href: 'https://www.instagram.com/its_rajatrai/' }
@@ -23,9 +21,6 @@ const tracks = [
   },
   {
     id: 'beyond',
-    title: 'BEYOND TECH',
-    description: 'The same lens pointed elsewhere: incentives, history, and ideas that outlast news cycles.',
-    topics: ['Dharma', 'Geopolitics', 'History', 'Philosophy', 'Books'],
     channels: [
       { label: 'YouTube', href: 'https://www.youtube.com/@itscuriousrajat' },
       { label: 'Instagram', href: 'https://www.instagram.com/itscuriousrajat/' }
@@ -45,7 +40,7 @@ const cleanTitle = (t) =>
     .replace(/\s{2,}/g, ' ')
     .trim()
 
-const LatestVideos = ({ videos, channelHref }) => {
+const LatestVideos = ({ videos, channelHref, tr }) => {
   if (!videos.length) return null
   const allShorts = videos.every((v) => v.short)
   const seeAllHref = channelHref && `${channelHref.replace(/\/$/, '')}/${allShorts ? 'shorts' : 'videos'}`
@@ -75,7 +70,7 @@ const LatestVideos = ({ videos, channelHref }) => {
                 {cleanTitle(v.title) || v.title}
               </p>
               <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                {v.short ? 'Short' : 'Video'}
+                {v.short ? tr('content.short') : tr('content.video')}
                 {v.publishedAt ? ` · ${formatDate(v.publishedAt)}` : ''}
               </p>
             </a>
@@ -89,7 +84,7 @@ const LatestVideos = ({ videos, channelHref }) => {
           rel="noopener noreferrer"
           className="mt-6 inline-block text-sm font-medium text-gray-900 underline underline-offset-4 decoration-gray-300 dark:text-white dark:decoration-gray-700"
         >
-          See all on YouTube
+          {tr('content.seeAll')}
         </a>
       )}
     </div>
@@ -118,21 +113,22 @@ const Content = () => {
   const { currentLanguage } = useLanguage()
   const fontClass = currentLanguage === 'bh' ? 'font-kaithi' : ''
   const videos = useLatestVideos()
+  const tr = (key) => getTranslation(currentLanguage, key)
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <div className="container">
         <header className="max-w-3xl pt-20 sm:pt-24 md:pt-28 pb-10">
           <h1 className={`text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 dark:text-white ${fontClass}`}>
-            {getTranslation(currentLanguage, 'content.title')}
+            {tr('content.title')}
           </h1>
           <p className={`mt-4 text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
-            {getTranslation(currentLanguage, 'content.subtitle')}
+            {tr('content.subtitle')}
           </p>
         </header>
 
         <main className="max-w-4xl pb-16 space-y-12">
-          {tracks.map((t) => (
+          {tracks.map((track) => ({ ...track, ...tr(`content.tracks.${track.id}`) })).map((t) => (
             <section key={t.id} className="border-t border-gray-200/60 dark:border-gray-800/60 pt-10">
               <h2 className={`text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400 ${fontClass}`}>
                 {t.title}
@@ -165,23 +161,24 @@ const Content = () => {
               <LatestVideos
                 videos={videos[t.id] || []}
                 channelHref={t.channels.find((c) => c.label === 'YouTube')?.href}
+                tr={tr}
               />
             </section>
           ))}
 
           <section className="border-t border-gray-200/60 dark:border-gray-800/60 pt-10">
             <h2 className={`text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400 ${fontClass}`}>
-              COLLABORATE
+              {tr('content.collaborateTitle')}
             </h2>
             <p className={`mt-5 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
-              Open to podcasts, conversations, and collaborations that go deeper than hot takes.
+              {tr('content.collaborateText')}
             </p>
             <div className="mt-6">
               <a
                 href="mailto:therajatraiofficial@gmail.com"
                 className={`inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-medium bg-gray-900 text-white dark:bg-white dark:text-gray-900 ${fontClass}`}
               >
-                Email me
+                {tr('common.emailMe')}
               </a>
             </div>
           </section>

@@ -51,33 +51,35 @@ const allJudging = [
 
 const judging = allJudging.filter((j) => !j.upcoming)
 
-const upcoming = [
-  ...upcomingTalks.map((t) => ({ ...t, venue: `Talk • ${t.venue}` })),
-  ...allJudging
-    .filter((j) => j.upcoming)
-    .map((j) => ({ title: j.event, venue: `${j.role} • ${j.place}`, date: j.date, upcoming: true }))
-]
-
 const Talks = () => {
   const { currentLanguage } = useLanguage()
   const fontClass = currentLanguage === 'bh' ? 'font-kaithi' : ''
+  const tr = (key) => getTranslation(currentLanguage, key)
+  const role = (r) => tr(`talks.roles.${r}`)
+
+  const upcoming = [
+    ...upcomingTalks.map((t) => ({ ...t, venue: `${tr('talks.talk')} • ${t.venue}` })),
+    ...allJudging
+      .filter((j) => j.upcoming)
+      .map((j) => ({ title: j.event, venue: `${role(j.role)} • ${j.place}`, date: j.date, upcoming: true }))
+  ]
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       <div className="container">
         <header className="max-w-3xl pt-20 sm:pt-24 md:pt-28 pb-10">
           <h1 className={`text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 dark:text-white ${fontClass}`}>
-            {getTranslation(currentLanguage, 'talks.title')}
+            {tr('talks.title')}
           </h1>
           <p className={`mt-4 text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
-            {getTranslation(currentLanguage, 'talks.subtitle')}
+            {tr('talks.subtitle')}
           </p>
         </header>
 
         <main className="max-w-4xl pb-16">
           {[
-            { id: 'upcoming', title: 'UPCOMING', list: upcoming },
-            { id: 'past', title: 'TALKS', list: pastTalks }
+            { id: 'upcoming', title: tr('talks.upcoming'), list: upcoming },
+            { id: 'past', title: tr('talks.past'), list: pastTalks }
           ]
             .filter((s) => s.list.length)
             .map((s, i) => (
@@ -97,7 +99,7 @@ const Talks = () => {
                         <p className="shrink-0 text-sm text-gray-500 dark:text-gray-400">
                           {t.upcoming && (
                             <span className="mr-2 rounded-full border border-emerald-600/30 px-2 py-0.5 text-xs font-medium text-emerald-700 dark:border-emerald-400/30 dark:text-emerald-400">
-                              Coming soon
+                              {tr('talks.comingSoon')}
                             </span>
                           )}
                           {t.date}
@@ -135,11 +137,11 @@ const Talks = () => {
 
           <section className="mt-12 border-t border-gray-200/60 dark:border-gray-800/60 pt-10">
             <h2 className={`text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400 ${fontClass}`}>
-              JUDGING / MENTORING
+              {tr('talks.judgingTitle')}
             </h2>
 
             <p className={`mt-5 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
-              I judge and mentor hackathons, looking for systems thinking, engineering quality, and clarity of trade-offs.
+              {tr('talks.judgingIntro')}
             </p>
 
             <ul className="mt-4 divide-y divide-gray-200/60 dark:divide-gray-800/60">
@@ -152,7 +154,7 @@ const Talks = () => {
                     <p className="shrink-0 text-sm text-gray-500 dark:text-gray-400">{j.date}</p>
                   </div>
                   <p className={`mt-2 text-sm text-gray-600 dark:text-gray-400 ${fontClass}`}>
-                    {j.role} • {j.place}
+                    {role(j.role)} • {j.place}
                   </p>
                 </li>
               ))}
@@ -161,17 +163,17 @@ const Talks = () => {
 
           <section className="mt-12 border-t border-gray-200/60 dark:border-gray-800/60 pt-10">
             <h2 className={`text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400 ${fontClass}`}>
-              INVITE
+              {tr('talks.inviteTitle')}
             </h2>
             <p className={`mt-5 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
-              If you want a talk on reliability, systems thinking, or engineering leverage, email me.
+              {tr('talks.inviteText')}
             </p>
             <div className="mt-6">
               <a
                 href="mailto:therajatraiofficial@gmail.com"
                 className={`inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-medium bg-gray-900 text-white dark:bg-white dark:text-gray-900 ${fontClass}`}
               >
-                Email me
+                {tr('common.emailMe')}
               </a>
             </div>
           </section>

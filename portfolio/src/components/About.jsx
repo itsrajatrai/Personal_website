@@ -1,58 +1,44 @@
 import React from 'react'
 import { useLanguage } from '../contexts/LanguageContext'
+import { getTranslation } from '../config/languageConfig'
+
+// Tool names stay in English; their group labels come from `about.skillLabels`, in the same order.
+const skillValues = [
+  'AWS (EC2, RDS/MariaDB), Terraform, Kubernetes, OpenShift, Helm, Docker, Akamai, Linux',
+  'GitLab CI/CD, Argo CD, preview environments',
+  'Splunk, Prometheus, HashiCorp Vault',
+  'Python, Go, JavaScript, TypeScript, Java, Bash',
+  'Node.js, Express, REST APIs, JWT auth, microservices',
+  'PostgreSQL, MongoDB, MariaDB, Redis',
+  'React, Vite, Tailwind CSS, HTML, CSS',
+  'RAG, OpenCV, Jupyter'
+]
 
 const About = () => {
   const { currentLanguage } = useLanguage()
   const fontClass = currentLanguage === 'bh' ? 'font-kaithi' : ''
+  const t = (key) => getTranslation(currentLanguage, key)
+
+  const goToWork = (e) => {
+    e.preventDefault()
+    window.dispatchEvent(new CustomEvent('navigateTo', { detail: 'work' }))
+  }
 
   const sections = [
     {
       id: 'about',
-      title: 'ABOUT',
-      items: [
-        'I’m Rajat Rai. I build systems that are easier to operate than to explain.',
-        'I care about reliability, clear interfaces, and decisions that survive time.',
-        'I’m drawn to problems where incentives, constraints, and feedback loops matter more than raw code.'
-      ]
+      title: t('about.aboutTitle'),
+      items: t('about.aboutItems'),
+      closing: t('about.closing')
     },
+    { id: 'interests', title: t('about.interestsTitle'), items: t('about.interests') },
     {
-      id: 'interests',
-      title: 'INTERESTS',
-      items: [
-        'Systems thinking (how things actually behave, not how they’re described).',
-        'Technology as leverage—especially tooling that reduces cognitive load.',
-        'Dharma and discipline: doing the right thing when it’s inconvenient.',
-        'Geopolitics and history: long time horizons, real trade-offs.'
-      ]
+      id: 'skills',
+      title: t('about.skillsTitle'),
+      skills: t('about.skillLabels').map((label, i) => [label, skillValues[i]])
     },
-    {
-      id: 'expertise',
-      title: 'TECHNICAL EXPERTISE',
-      items: [
-        'Reliability work: failure modes, guardrails, runbooks, incident hygiene.',
-        'Engineering systems: reduce coupling, tighten boundaries, make changes cheap.',
-        'Linux + open source mindset: understand the substrate, not just the surface.'
-      ]
-    },
-    {
-      id: 'philosophy',
-      title: 'PHILOSOPHY',
-      items: [
-        'Clarity is a feature. Complexity is a cost.',
-        'A good system makes the correct action the easiest action.',
-        'Write decisions down. The system should have a memory.',
-        'Aim for “boring” operations: predictable recovery, predictable changes.'
-      ]
-    },
-    {
-      id: 'books',
-      title: 'BOOKS / IDEAS I RETURN TO',
-      items: [
-        'Stoicism, Indian philosophy, and first-principles thinking.',
-        'History as pattern recognition: incentives, geography, institutions.',
-        'Writing as compression: keep only what’s true and useful.'
-      ]
-    }
+    { id: 'philosophy', title: t('about.philosophyTitle'), items: t('about.philosophy') },
+    { id: 'books', title: t('about.booksTitle'), items: t('about.books') }
   ]
 
   const socials = [
@@ -119,13 +105,13 @@ const About = () => {
           <div className="flex items-start justify-between gap-6">
             <div className="max-w-3xl">
               <p className={`text-sm tracking-wide text-gray-500 dark:text-gray-400 ${fontClass}`}>
-                Software Engineer at Red Hat
+                {t('about.eyebrow')}
               </p>
               <h1 className={`mt-4 text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 dark:text-white ${fontClass}`}>
-                About
+                {t('about.title')}
               </h1>
               <p className={`mt-4 text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
-                A short map of what I care about: systems, constraints, and the long game.
+                {t('about.subtitle')}
               </p>
             </div>
 
@@ -162,8 +148,20 @@ const About = () => {
                 <h2 className={`text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400 ${fontClass}`}>
                   {s.title}
                 </h2>
-                <div className="mt-5 space-y-3">
-                  {s.items.map((line) => (
+                {s.skills && (
+                  <dl className="mt-5 space-y-4 sm:space-y-3">
+                    {s.skills.map(([label, value]) => (
+                      <div key={label} className="sm:grid sm:grid-cols-[13rem_1fr] sm:gap-6">
+                        <dt className="text-sm text-gray-500 dark:text-gray-400">{label}</dt>
+                        <dd className="mt-1 sm:mt-0 text-sm sm:text-base text-gray-800 dark:text-gray-200 leading-relaxed">
+                          {value}
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+                <div className={s.items ? 'mt-5 space-y-3' : 'hidden'}>
+                  {(s.items || []).map((line) => (
                     <p
                       key={line}
                       className={`text-sm sm:text-base text-gray-800 dark:text-gray-200 leading-relaxed ${fontClass}`}
@@ -171,19 +169,35 @@ const About = () => {
                       {line}
                     </p>
                   ))}
+                  {s.id === 'about' && (
+                    <p className={`text-sm sm:text-base text-gray-800 dark:text-gray-200 leading-relaxed ${fontClass}`}>
+                      {t('about.redHat')}{' '}
+                      <a
+                        href="/work"
+                        onClick={goToWork}
+                        className="font-medium text-gray-900 dark:text-white underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700"
+                      >
+                        {t('about.seeWork')}
+                      </a>
+                    </p>
+                  )}
+                  {s.closing && (
+                    <p className={`text-sm sm:text-base text-gray-800 dark:text-gray-200 leading-relaxed ${fontClass}`}>
+                      {s.closing}
+                    </p>
+                  )}
                 </div>
               </section>
             ))}
 
             <section className="border-t border-gray-200/60 dark:border-gray-800/60 pt-10">
               <h2 className={`text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400 ${fontClass}`}>
-                THINGS I LIKE
+                {t('about.likesTitle')}
               </h2>
               <ul className={`mt-5 space-y-2 text-sm sm:text-base text-gray-800 dark:text-gray-200 ${fontClass}`}>
-                <li>Simple interfaces.</li>
-                <li>Quiet tools that respect attention.</li>
-                <li>Maps, timelines, and first-hand sources.</li>
-                <li>Good food. Good silence. Good work.</li>
+                {t('about.likes').map((like) => (
+                  <li key={like}>{like}</li>
+                ))}
               </ul>
             </section>
           </div>

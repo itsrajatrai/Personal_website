@@ -1,36 +1,12 @@
 import React from 'react'
 import { useBlogPosts } from '../hooks/useBlogPosts'
-const workHighlights = [
-  'Reliability without heroics: runbooks, guardrails, and automation that make recovery boring.',
-  'Removing coupling: smaller workflows with written invariants and one owner per boundary.',
-  'Legible decisions: short memos that ship choices sooner and give the system a memory.',
-  'Docs that get used: one-page system maps you can read in 60 seconds under pressure.'
-]
-
-const philosophy = [
-  'Clarity is a design choice. So is confusion.',
-  'Most “complexity” is unpaid debt with good PR.',
-  'Good systems don’t rely on heroics; they make the right thing the easy thing.',
-  'Leverage isn’t doing more—it’s choosing constraints that do the work for you.',
-  'If you can’t explain the trade-off, you don’t understand the decision.',
-  'Dharma, in engineering, looks like clean incentives and honest boundaries.'
-]
-
-const thoughts = [
-  'The best architecture is the one that makes the next change cheap.',
-  'Incentives are upstream of culture. Culture is downstream of incentives.',
-  'A system is what remains after you remove the people doing extra work.',
-  '“Scale” is usually just unpriced coupling.',
-  'Stability comes from boundaries, not optimism.',
-  'Time is a design constraint; treat it like memory or CPU.',
-  'The skill isn’t speed. It’s knowing what to ignore.',
-  'Tools don’t create leverage—taste does.',
-  'Dharma is doing the right thing when nobody is watching; engineering is the same.',
-  'Geopolitics is systems design with slower clocks and higher stakes.'
-]
+import { useLanguage } from '../contexts/LanguageContext'
+import { getTranslation } from '../config/languageConfig'
 
 const Hero = () => {
   const { posts, loading } = useBlogPosts()
+  const { currentLanguage } = useLanguage()
+  const t = (key) => getTranslation(currentLanguage, key)
 
   const goToBlog = (e) => {
     e?.preventDefault?.()
@@ -40,6 +16,11 @@ const Hero = () => {
   const goToWork = (e) => {
     e?.preventDefault?.()
     window.dispatchEvent(new CustomEvent('navigateTo', { detail: 'work' }))
+  }
+
+  const goToTalks = (e) => {
+    e?.preventDefault?.()
+    window.dispatchEvent(new CustomEvent('navigateTo', { detail: 'talks' }))
   }
 
   const stripHtml = (html) => {
@@ -60,7 +41,7 @@ const Hero = () => {
     const tech = (posts.hashnode || []).slice(0, 2).map((p) => ({
       title: p.title,
       url: p.url,
-      source: 'Tech',
+      source: t('home.tech'),
       date: p.dateAdded ? new Date(p.dateAdded) : null,
       readTime: estimateReadTime(stripHtml(p.brief))
     }))
@@ -68,7 +49,7 @@ const Hero = () => {
     const nonTech = (posts.medium || []).slice(0, 2).map((p) => ({
       title: p.title,
       url: p.link,
-      source: 'Non-Tech',
+      source: t('home.nonTech'),
       date: p.pubDate ? new Date(p.pubDate) : null,
       readTime: p.readingTime || estimateReadTime(stripHtml(p.description))
     }))
@@ -143,15 +124,18 @@ const Hero = () => {
           <div className="pt-14 sm:pt-20 md:pt-28 pb-10 sm:pb-14 md:pb-20 flex flex-col-reverse lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-16">
           <div className="max-w-3xl">
             <p className="text-sm tracking-wide text-gray-500 dark:text-gray-400">
-              Software Engineer at Red Hat • builder • long-term thinker
+              {t('home.eyebrow')}
             </p>
 
             <h1 className="mt-4 text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight text-gray-950 dark:text-white">
-              Rajat Rai builds software that compounds.
+              {t('home.greeting')}
+              <span className="block mt-2 text-gray-500 dark:text-gray-400">
+                {t('home.tagline')}
+              </span>
             </h1>
 
             <p className="mt-5 text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
-              Systems-first engineering: turn messy problems into simple, durable systems.
+              {t('home.intro')}
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -160,14 +144,14 @@ const Hero = () => {
                 onClick={goToBlog}
                 className="inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-medium bg-gray-900 text-white dark:bg-white dark:text-gray-900"
               >
-                Read my notes
+                {t('home.readNotes')}
               </a>
               <a
                 href="/work"
                 onClick={goToWork}
                 className="inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-medium border border-gray-200 dark:border-gray-800 text-gray-900 dark:text-white"
               >
-                See selected work
+                {t('home.seeWork')}
               </a>
             </div>
 
@@ -190,22 +174,22 @@ const Hero = () => {
             <div className="mt-10 border-t border-gray-200/60 dark:border-gray-800/60 pt-8">
               <div className="flex items-baseline justify-between gap-6">
                 <h2 className="text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400">
-                  RECENT WRITING
+                  {t('home.recentWriting')}
                 </h2>
                 <a
                   href="#"
                   onClick={goToBlog}
                   className="text-sm font-medium text-gray-900 dark:text-white underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700"
                 >
-                  View all
+                  {t('home.viewAll')}
                 </a>
               </div>
 
               <div className="mt-5">
                 {loading ? (
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Loading…</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{t('common.loading')}</p>
                 ) : recentWriting.length === 0 ? (
-                  <p className="text-sm text-gray-500 dark:text-gray-400">No posts yet.</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{t('home.noPosts')}</p>
                 ) : (
                   <ul className="space-y-4">
                     {recentWriting.map((p) => (
@@ -258,10 +242,10 @@ const Hero = () => {
         <div className="container">
           <div className="max-w-3xl py-12 sm:py-16 md:py-20">
             <h2 className="text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400">
-              PHILOSOPHY
+              {t('home.philosophyTitle')}
             </h2>
             <div className="mt-6 space-y-3 text-base sm:text-lg text-gray-800 dark:text-gray-200">
-              {philosophy.map((line) => (
+              {t('home.philosophy').map((line) => (
                 <p key={line} className="leading-relaxed">
                   {line}
                 </p>
@@ -276,18 +260,21 @@ const Hero = () => {
           <div className="max-w-4xl py-12 sm:py-16 md:py-20">
             <div className="max-w-3xl">
               <h2 className="text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400">
-                WORK
+                {t('home.workTitle')}
               </h2>
               <p className="mt-3 text-lg sm:text-xl text-gray-700 dark:text-gray-300">
-                Projects and patterns from production. The common thread: fewer moving parts, clearer invariants, better outcomes.
+                {t('home.workSubtitle')}
               </p>
             </div>
 
-            <ul className="mt-8 max-w-3xl space-y-3 text-gray-800 dark:text-gray-200">
-              {workHighlights.map((w) => (
-                <li key={w} className="leading-relaxed">{w}</li>
+            <dl className="mt-8 max-w-3xl space-y-4 sm:space-y-3">
+              {t('home.workHighlights').map(([label, text]) => (
+                <div key={label} className="sm:grid sm:grid-cols-[10rem_1fr] sm:gap-6">
+                  <dt className="text-sm sm:text-base text-gray-500 dark:text-gray-400">{label}</dt>
+                  <dd className="mt-1 sm:mt-0 leading-relaxed text-gray-800 dark:text-gray-200">{text}</dd>
+                </div>
               ))}
-            </ul>
+            </dl>
 
             <div className="mt-8">
               <a
@@ -295,7 +282,7 @@ const Hero = () => {
                 onClick={goToWork}
                 className="text-sm font-medium text-gray-900 dark:text-white underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700"
               >
-                See projects
+                {t('home.seeProjects')}
               </a>
             </div>
           </div>
@@ -307,17 +294,17 @@ const Hero = () => {
           <div className="max-w-4xl py-12 sm:py-16 md:py-20">
             <div className="max-w-3xl">
               <h2 className="text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400">
-                THOUGHTS
+                {t('home.thoughtsTitle')}
               </h2>
               <p className="mt-3 text-lg sm:text-xl text-gray-700 dark:text-gray-300">
-                Short notes on systems, leverage, technology, and living well.
+                {t('home.thoughtsSubtitle')}
               </p>
             </div>
 
             <ul className="mt-8 max-w-3xl space-y-3 text-gray-800 dark:text-gray-200">
-              {thoughts.map((t) => (
-                <li key={t} className="leading-relaxed">
-                  {t}
+              {t('home.thoughts').map((thought) => (
+                <li key={thought} className="leading-relaxed">
+                  {thought}
                 </li>
               ))}
             </ul>
@@ -328,7 +315,7 @@ const Hero = () => {
                 onClick={goToBlog}
                 className="text-sm font-medium text-gray-900 dark:text-white underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700"
               >
-                Subscribe / read longer notes
+                {t('home.subscribe')}
               </a>
             </div>
           </div>
@@ -339,18 +326,23 @@ const Hero = () => {
         <div className="container">
           <div className="max-w-3xl py-12 sm:py-16 md:py-20">
             <h2 className="text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400">
-              PROOF
+              {t('home.proofTitle')}
             </h2>
             <div className="mt-6 space-y-3 text-gray-800 dark:text-gray-200">
-              <p>
-                <span className="text-gray-500 dark:text-gray-400">Red Hat</span> — building and maintaining systems that must hold under load.
-              </p>
-              <p>
-                <span className="text-gray-500 dark:text-gray-400">Interests</span> — systems thinking, technology, Dharma, geopolitics, history.
-              </p>
-              <p>
-                <span className="text-gray-500 dark:text-gray-400">Principle</span> — fewer words, fewer moving parts, more truth.
-              </p>
+              {t('home.proof').map(([label, text]) => (
+                <p key={label}>
+                  <span className="text-gray-500 dark:text-gray-400">{label}</span> — {text}
+                </p>
+              ))}
+            </div>
+            <div className="mt-8">
+              <a
+                href="/talks"
+                onClick={goToTalks}
+                className="text-sm font-medium text-gray-900 dark:text-white underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700"
+              >
+                {t('home.seeTalks')}
+              </a>
             </div>
           </div>
         </div>
@@ -360,10 +352,10 @@ const Hero = () => {
         <div className="container">
           <div className="max-w-3xl py-12 sm:py-16 md:py-20">
             <h2 className="text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400">
-              ACTION
+              {t('home.actionTitle')}
             </h2>
             <p className="mt-3 text-lg sm:text-xl text-gray-700 dark:text-gray-300">
-              If you’re building something serious, send the hard problem.
+              {t('home.actionText')}
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
@@ -371,7 +363,7 @@ const Hero = () => {
                 href="mailto:therajatraiofficial@gmail.com"
                 className="inline-flex items-center justify-center rounded-lg px-5 py-3 text-sm font-medium bg-gray-900 text-white dark:bg-white dark:text-gray-900"
               >
-                Email me
+                {t('common.emailMe')}
               </a>
               <a
                 href="https://github.com/itsrajatrai"

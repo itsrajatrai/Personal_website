@@ -14,6 +14,7 @@ const Certifications = () => {
   const fontClass = currentLanguage === 'bh' ? 'font-kaithi' : ''
   const [badges, setBadges] = useState([])
   const [loading, setLoading] = useState(true)
+  const t = (key) => getTranslation(currentLanguage, key)
 
   useEffect(() => {
     fetch('/credly-badges.json')
@@ -28,10 +29,10 @@ const Certifications = () => {
       <div className="container">
         <header className="max-w-3xl pt-20 sm:pt-24 md:pt-28 pb-10">
           <h1 className={`text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-gray-950 dark:text-white ${fontClass}`}>
-            {getTranslation(currentLanguage, 'certifications.title')}
+            {t('certifications.title')}
           </h1>
           <p className={`mt-4 text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed ${fontClass}`}>
-            {getTranslation(currentLanguage, 'certifications.subtitle')}
+            {t('certifications.subtitle')}
           </p>
           <a
             href={CREDLY_PROFILE}
@@ -39,21 +40,21 @@ const Certifications = () => {
             rel="noopener noreferrer"
             className="mt-6 inline-block text-sm font-medium text-gray-900 dark:text-white underline underline-offset-4 decoration-gray-300 dark:decoration-gray-700"
           >
-            Verify on Credly
+            {t('certifications.verify')}
           </a>
         </header>
 
         <main className="max-w-4xl pb-16">
           <section className="border-t border-gray-200/60 dark:border-gray-800/60 pt-10">
             <h2 className={`text-xs font-semibold tracking-widest text-gray-500 dark:text-gray-400 ${fontClass}`}>
-              BADGES
+              {t('certifications.badges')}
             </h2>
 
             {loading ? (
-              <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">Loading…</p>
+              <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">{t('common.loading')}</p>
             ) : badges.length === 0 ? (
               <p className="mt-6 text-sm text-gray-500 dark:text-gray-400">
-                No badges to show right now. See the full list on{' '}
+                {t('certifications.empty')}{' '}
                 <a href={CREDLY_PROFILE} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">
                   Credly
                 </a>
@@ -85,7 +86,7 @@ const Certifications = () => {
                         </div>
                         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                           {b.issuer}
-                          {b.expiresAt ? <> • Expires {formatDate(b.expiresAt)}</> : null}
+                          {b.expiresAt ? <> • {t('certifications.expires')} {formatDate(b.expiresAt)}</> : null}
                         </p>
                         {b.skills?.length ? (
                           <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
