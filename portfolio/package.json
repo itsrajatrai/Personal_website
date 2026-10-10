@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/fetch-credly.mjs && node scripts/fetch-youtube.mjs",
+    "predev": "node scripts/fetch-credly.mjs && node scripts/fetch-youtube.mjs && node scripts/fetch-medium.mjs",
     "dev": "vite",
-    "prebuild": "node scripts/fetch-credly.mjs && node scripts/fetch-youtube.mjs",
+    "prebuild": "node scripts/fetch-credly.mjs && node scripts/fetch-youtube.mjs && node scripts/fetch-medium.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

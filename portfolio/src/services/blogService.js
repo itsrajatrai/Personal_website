@@ -1,36 +1,41 @@
 // Blog service for fetching posts from Medium and Hashnode
-import { BLOG_CONFIG, getMediumRSSUrl, getHashnodeRESTUrl, getHashnodeRSSUrl } from '../config/blogConfig'
+import { BLOG_CONFIG, getHashnodeRESTUrl, getHashnodeRSSUrl } from '../config/blogConfig'
 
-// Medium API - Using RSS feed since Medium doesn't have a public API
+// Medium has no public API and rss2json fails on its feed, so the RSS XML is read
+// from our own endpoint (api/medium-feed.js), falling back to the copy saved at build time.
+const MEDIUM_SOURCES = ['/api/medium-feed', '/medium-feed.xml']
+
+const parseMediumFeed = (xml) => {
+  const doc = new DOMParser().parseFromString(xml, 'text/xml')
+  const text = (el, tag) => el.getElementsByTagName(tag)[0]?.textContent?.trim() || ''
+
+  return [...doc.getElementsByTagName('item')].map((item) => {
+    const content = text(item, 'content:encoded')
+    return {
+      id: text(item, 'guid') || text(item, 'link'),
+      title: text(item, 'title'),
+      description: content,
+      link: text(item, 'link'),
+      pubDate: text(item, 'pubDate'),
+      thumbnail: content.match(/<img[^>]+src="([^"]+)"/)?.[1] || null,
+      author: text(item, 'dc:creator'),
+      categories: [...item.getElementsByTagName('category')].map((c) => c.textContent)
+    }
+  })
+}
+
 export const fetchMediumPosts = async () => {
-  try {
-    // Using RSS2JSON service to convert Medium RSS to JSON
-    const response = await fetch(getMediumRSSUrl(BLOG_CONFIG.MEDIUM_USERNAME))
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch Medium posts')
+  for (const source of MEDIUM_SOURCES) {
+    try {
+      const response = await fetch(source)
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      const posts = parseMediumFeed(await response.text())
+      if (posts.length) return posts
+    } catch (error) {
+      console.warn(`Medium posts unavailable from ${source}:`, error.message)
     }
-    
-    const data = await response.json()
-    
-    if (data.status === 'ok' && data.items) {
-      return data.items.map(item => ({
-        id: item.guid,
-        title: item.title,
-        description: item.description,
-        link: item.link,
-        pubDate: item.pubDate,
-        thumbnail: item.thumbnail || null,
-        author: item.author,
-        categories: item.categories || []
-      }))
-    }
-    
-    return []
-  } catch (error) {
-    console.error('Error fetching Medium posts:', error)
-    return []
   }
+  return []
 }
 
 export const fetchHashnodePosts = async () => {
