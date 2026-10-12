@@ -29,10 +29,6 @@ export const getMediumRSSUrl = (username) => {
   return `${BLOG_CONFIG.ENDPOINTS.MEDIUM_RSS}?rss_url=https://medium.com/feed/@${username}`
 }
 
-export const getHashnodeRSSUrl = () => {
-  return `${BLOG_CONFIG.ENDPOINTS.MEDIUM_RSS}?rss_url=${BLOG_CONFIG.HASHNODE_BLOG_URL}/rss.xml`
-}
-
 // Helper function to get Hashnode REST URL
 export const getHashnodeRESTUrl = (username) => {
   return `${BLOG_CONFIG.ENDPOINTS.HASHNODE_REST}?username=${username}&limit=${BLOG_CONFIG.POSTS_LIMIT}`

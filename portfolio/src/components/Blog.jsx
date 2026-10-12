@@ -89,6 +89,7 @@ const Blog = () => {
     const url = post.link || post.url
     const dateStr = post.pubDate || post.dateAdded
     const excerpt = excerptFor(post)
+    const readTime = post.readTimeInMinutes ? `${post.readTimeInMinutes} min read` : excerpt && estimateReadTime(excerpt)
 
     return (
       <li key={post.id || post.guid || url} className="py-5 sm:py-6">
@@ -103,7 +104,7 @@ const Blog = () => {
           </div>
 
           <p className={`mt-2 text-sm text-gray-600 dark:text-gray-400 ${fontClass}`}>
-            {platform} {excerpt ? <>• {estimateReadTime(excerpt)}</> : null}
+            {platform} {readTime ? <>• {readTime}</> : null}
           </p>
 
           {excerpt ? (

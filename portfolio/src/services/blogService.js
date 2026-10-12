@@ -1,5 +1,5 @@
 // Blog service for fetching posts from Medium and Hashnode
-import { BLOG_CONFIG, getHashnodeRESTUrl, getHashnodeRSSUrl } from '../config/blogConfig'
+import { BLOG_CONFIG, getHashnodeRESTUrl } from '../config/blogConfig'
 
 // Medium has no public API and rss2json fails on its feed, so the RSS XML is read
 // from our own endpoint (api/medium-feed.js), falling back to the copy saved at build time.
@@ -38,34 +38,22 @@ export const fetchMediumPosts = async () => {
   return []
 }
 
+// Hashnode's API is Pro-only and its RSS feed blocks automated readers, so posts come from
+// our own endpoint (api/hashnode-posts.js), falling back to the copy saved at build time.
+const HASHNODE_SOURCES = ['/api/hashnode-posts', '/hashnode-posts.json']
+
 export const fetchHashnodePosts = async () => {
-  try {
-    const response = await fetch(getHashnodeRSSUrl())
-
-    if (!response.ok) {
-      throw new Error(`Failed to fetch Hashnode posts: ${response.status}`)
+  for (const source of HASHNODE_SOURCES) {
+    try {
+      const response = await fetch(source)
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      const { posts } = await response.json()
+      if (posts?.length) return posts.slice(0, BLOG_CONFIG.POSTS_LIMIT)
+    } catch (error) {
+      console.warn(`Hashnode posts unavailable from ${source}:`, error.message)
     }
-
-    const data = await response.json()
-
-    if (data.status === 'ok' && Array.isArray(data.items)) {
-      return data.items.slice(0, BLOG_CONFIG.POSTS_LIMIT).map(item => ({
-        id: item.guid || item.link,
-        title: item.title,
-        brief: item.description,
-        url: item.link,
-        dateAdded: item.pubDate,
-        thumbnail: item.thumbnail || item.enclosure?.link || null,
-        tags: item.categories || []
-      }))
-    }
-
-    return []
-  } catch (error) {
-    console.error('Error fetching Hashnode posts:', error)
-    // Return empty array to prevent app from crashing
-    return []
   }
+  return []
 }
 
 // Alternative Hashnode API using their REST API

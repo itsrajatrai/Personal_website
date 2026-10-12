@@ -43,7 +43,7 @@ const Hero = () => {
       url: p.url,
       source: t('home.tech'),
       date: p.dateAdded ? new Date(p.dateAdded) : null,
-      readTime: estimateReadTime(stripHtml(p.brief))
+      readTime: p.readTimeInMinutes ? `${p.readTimeInMinutes} min read` : estimateReadTime(stripHtml(p.brief))
     }))
 
     const nonTech = (posts.medium || []).slice(0, 2).map((p) => ({
