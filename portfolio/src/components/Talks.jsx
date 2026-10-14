@@ -9,7 +9,6 @@ const talks = [
     title: 'The Double Left Shift: What Engineers Do When Code Is Cheap',
     venue: 'PIET, Panipat, Haryana',
     date: 'Oct 2026',
-    upcoming: true,
     description: 'When writing code stops being the bottleneck, the work shifts left twice: towards the problem, and towards the system that has to run it.',
     links: []
   },
@@ -41,7 +40,7 @@ const pastTalks = talks.filter((t) => !t.upcoming)
 
 // Newest first. `upcoming: true` moves an event into the Upcoming section.
 const allJudging = [
-  { event: 'Hack Arena at CodeX 3.0', role: 'Judge', date: 'Oct 2026', place: 'PIET, Panipat', upcoming: true },
+  { event: 'Hack Arena at CodeX 3.0', role: 'Judge', date: 'Oct 2026', place: 'PIET, Panipat' },
   { event: 'EcoSphere', role: 'Mentor', date: 'Aug 2026', place: 'Organised by Knotic in association with Agora' },
   { event: 'Eco Code', role: 'Judge', date: 'Sep 2025', place: 'BVCOE, Paschim Vihar, New Delhi' },
   { event: 'Hack the Future Edition', role: 'Judge', date: 'Jan 2025', place: 'WWF India Office, New Delhi' },
